@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
+  "data": {"name": "data-eaf93614faa2a7f590e197dc3cafd286"},
+  "mark": {"type": "point", "filled": true, "size": 150},
+  "encoding": {
+    "color": {"field": "designers", "title": "Designers", "type": "nominal"},
+    "tooltip": [
+      {"field": "designers", "title": "Designer", "type": "nominal"},
+      {
+        "field": "count",
+        "title": "Number of Designed Games",
+        "type": "quantitative"
+      },
+      {"field": "mean", "title": "Average Game Rating", "type": "quantitative"}
+    ],
+    "x": {
+      "field": "count",
+      "scale": {"domain": [8, 20]},
+      "title": "Number of Designed Games",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "mean",
+      "scale": {"domain": [4, 10]},
+      "title": "Average Game Rating",
+      "type": "quantitative"
+    }
+  },
+  "height": 360,
+  "selection": {
+    "selector075": {
+      "type": "interval",
+      "bind": "scales",
+      "encodings": ["x", "y"]
+    }
+  },
+  "title": "Top 10 Boardgame Designers",
+  "width": 600,
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-eaf93614faa2a7f590e197dc3cafd286": [
+      {"designers": "Ed Beach", "mean": 8.34, "count": 14},
+      {"designers": "Jeff Lewis", "mean": 8.09, "count": 11},
+      {"designers": "Emanuele Santandrea", "mean": 8.04, "count": 12},
+      {"designers": "Gregory M. Smith", "mean": 7.94, "count": 14},
+      {"designers": "Noah Cohen", "mean": 7.92, "count": 12},
+      {"designers": "Volko Ruhnke", "mean": 7.91, "count": 11},
+      {"designers": "Manny Trembley", "mean": 7.89, "count": 18},
+      {"designers": "Nate Chatellier", "mean": 7.89, "count": 18},
+      {"designers": "Mark Simonitch", "mean": 7.86, "count": 19},
+      {"designers": "Michael Shinall", "mean": 7.86, "count": 15}
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

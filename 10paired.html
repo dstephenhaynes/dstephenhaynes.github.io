@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
+  "data": {"name": "data-3698aa33a3f7cf5f646bed67cb008a21"},
+  "mark": {"type": "point", "filled": true, "size": 150},
+  "encoding": {
+    "color": {
+      "field": "combined",
+      "title": "Designers / Publishers",
+      "type": "nominal"
+    },
+    "tooltip": [
+      {"field": "combined", "title": "Designer / Publisher", "type": "nominal"},
+      {
+        "field": "pair_count",
+        "title": "Number of Times Designer/Publisher Paired",
+        "type": "quantitative"
+      },
+      {
+        "field": "average_rating",
+        "title": "Average Game Rating by Paired Designer/Publisher",
+        "type": "quantitative"
+      }
+    ],
+    "x": {
+      "field": "pair_count",
+      "scale": {"domain": [8, 20]},
+      "title": "Number of Times Designer/Publisher Paired",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "average_rating",
+      "scale": {"domain": [7, 9]},
+      "title": "Average Game Rating by Paired Designer/Publisher",
+      "type": "quantitative"
+    }
+  },
+  "height": 360,
+  "selection": {
+    "selector080": {
+      "type": "interval",
+      "bind": "scales",
+      "encodings": ["x", "y"]
+    },
+    "selector079": {"type": "multi", "fields": ["combined"], "bind": "legend"}
+  },
+  "title": "Top 10 Boardgame Designer/Publisher Pairings",
+  "width": 600,
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-3698aa33a3f7cf5f646bed67cb008a21": [
+      {
+        "designers": "Michael Shinall",
+        "publishers": "CMON Global Limited",
+        "pair_count": 11,
+        "average_rating": 8.1,
+        "combined": "Michael Shinall / CMON Global Limited"
+      },
+      {
+        "designers": "Jeff Lewis",
+        "publishers": "Lock 'n Load Publishing LLC",
+        "pair_count": 11,
+        "average_rating": 8.09,
+        "combined": "Jeff Lewis / Lock 'n Load Publishing LLC"
+      },
+      {
+        "designers": "Rob Daviau",
+        "publishers": "Mondo Games",
+        "pair_count": 11,
+        "average_rating": 8.08,
+        "combined": "Rob Daviau / Mondo Games"
+      },
+      {
+        "designers": "Justin D. Jacobson",
+        "publishers": "Mondo Games",
+        "pair_count": 11,
+        "average_rating": 8.08,
+        "combined": "Justin D. Jacobson / Mondo Games"
+      },
+      {
+        "designers": "Mark Simonitch",
+        "publishers": "GMT Games",
+        "pair_count": 12,
+        "average_rating": 8.04,
+        "combined": "Mark Simonitch / GMT Games"
+      },
+      {
+        "designers": "Emanuele Santandrea",
+        "publishers": "VentoNuovo Games",
+        "pair_count": 12,
+        "average_rating": 8.04,
+        "combined": "Emanuele Santandrea / VentoNuovo Games"
+      },
+      {
+        "designers": "Gregory M. Smith",
+        "publishers": "Compass Games",
+        "pair_count": 10,
+        "average_rating": 7.93,
+        "combined": "Gregory M. Smith / Compass Games"
+      },
+      {
+        "designers": "Volko Ruhnke",
+        "publishers": "GMT Games",
+        "pair_count": 11,
+        "average_rating": 7.91,
+        "combined": "Volko Ruhnke / GMT Games"
+      },
+      {
+        "designers": "Nate Chatellier",
+        "publishers": "Roxley",
+        "pair_count": 18,
+        "average_rating": 7.89,
+        "combined": "Nate Chatellier / Roxley"
+      },
+      {
+        "designers": "Manny Trembley",
+        "publishers": "Roxley",
+        "pair_count": 18,
+        "average_rating": 7.89,
+        "combined": "Manny Trembley / Roxley"
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
