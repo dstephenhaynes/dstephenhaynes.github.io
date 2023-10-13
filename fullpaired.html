@@ -1,0 +1,3824 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {
+    "view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}
+  },
+  "hconcat": [
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "color": {
+          "condition": {"value": "steelblue", "selection": "selector048"},
+          "value": "grey"
+        },
+        "tooltip": [
+          {
+            "field": "combined",
+            "title": "Designer/Publisher",
+            "type": "nominal"
+          },
+          {
+            "field": "pair_count",
+            "title": "Number of Published Games",
+            "type": "quantitative"
+          },
+          {
+            "field": "average_rating",
+            "title": "Average Game Rating",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "pair_count",
+          "title": "Number of Times Designer/Publisher Paired",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "average_rating",
+          "title": "Average Game Rating by Paired Designer/Publisher",
+          "type": "quantitative"
+        }
+      },
+      "height": 360,
+      "selection": {
+        "selector048": {
+          "type": "interval",
+          "encodings": ["x", "y"],
+          "on": "[mousedown[!event.shiftKey], mouseup] > mousemove",
+          "translate": "[mousedown[!event.shiftKey], mouseup] > mousemove!",
+          "zoom": "wheel![event.altKey]"
+        },
+        "selector049": {
+          "type": "interval",
+          "bind": "scales",
+          "on": "[mousedown[event.shiftKey], mouseup] > mousemove",
+          "translate": "[mousedown[event.shiftKey], mouseup] > mousemove!",
+          "zoom": "wheel![!event.altKey]"
+        }
+      },
+      "width": 600
+    },
+    {
+      "hconcat": [
+        {
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "combined", "type": "nominal"},
+            "y": {"axis": null, "field": "row_number", "type": "ordinal"}
+          },
+          "title": "Designers/Publishers",
+          "transform": [
+            {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
+            {"filter": {"selection": "selector048"}},
+            {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
+            {"filter": "(datum.rank < 20)"}
+          ]
+        },
+        {
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "average_rating", "type": "nominal"},
+            "y": {"axis": null, "field": "row_number", "type": "ordinal"}
+          },
+          "title": "Rating",
+          "transform": [
+            {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
+            {"filter": {"selection": "selector048"}},
+            {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
+            {"filter": "(datum.rank < 20)"}
+          ]
+        }
+      ]
+    }
+  ],
+  "data": {"name": "data-dbc7dcd20bf701e6c1fa4e5c6c2bbcb3"},
+  "resolve": {"legend": {"color": "independent"}},
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-dbc7dcd20bf701e6c1fa4e5c6c2bbcb3": [
+      {
+        "designers": "Joseph Miranda",
+        "publishers": "Decision Games (I)",
+        "pair_count": 191,
+        "average_rating": 6.71,
+        "combined": "Joseph Miranda / Decision Games (I)"
+      },
+      {
+        "designers": "Jim Dunnigan",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 86,
+        "average_rating": 6.23,
+        "combined": "Jim Dunnigan / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Steve Jackson Games",
+        "pair_count": 81,
+        "average_rating": 6.35,
+        "combined": "Steve Jackson (I) / Steve Jackson Games"
+      },
+      {
+        "designers": "James Ernest",
+        "publishers": "Cheapass Games",
+        "pair_count": 78,
+        "average_rating": 6.01,
+        "combined": "James Ernest / Cheapass Games"
+      },
+      {
+        "designers": "Andrew Looney",
+        "publishers": "Looney Labs",
+        "pair_count": 74,
+        "average_rating": 6.28,
+        "combined": "Andrew Looney / Looney Labs"
+      },
+      {
+        "designers": "Frank Chadwick",
+        "publishers": "Game Designers' Workshop (GDW Games)",
+        "pair_count": 71,
+        "average_rating": 6.64,
+        "combined": "Frank Chadwick / Game Designers' Workshop (GDW Games)"
+      },
+      {
+        "designers": "Ty Bomba",
+        "publishers": "Decision Games (I)",
+        "pair_count": 67,
+        "average_rating": 6.54,
+        "combined": "Ty Bomba / Decision Games (I)"
+      },
+      {
+        "designers": "Dean Essig",
+        "publishers": "The Gamers",
+        "pair_count": 58,
+        "average_rating": 7.27,
+        "combined": "Dean Essig / The Gamers"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "KOSMOS",
+        "pair_count": 57,
+        "average_rating": 6.68,
+        "combined": "Klaus Teuber / KOSMOS"
+      },
+      {
+        "designers": "Richard H. Berg",
+        "publishers": "GMT Games",
+        "pair_count": 53,
+        "average_rating": 7.19,
+        "combined": "Richard H. Berg / GMT Games"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "2F-Spiele",
+        "pair_count": 51,
+        "average_rating": 6.62,
+        "combined": "Friedemann Friese / 2F-Spiele"
+      },
+      {
+        "designers": "Eric R. Harvey",
+        "publishers": "Decision Games (I)",
+        "pair_count": 49,
+        "average_rating": 6.83,
+        "combined": "Eric R. Harvey / Decision Games (I)"
+      },
+      {
+        "designers": "Matt Hyra",
+        "publishers": "Cryptozoic Entertainment",
+        "pair_count": 49,
+        "average_rating": 6.47,
+        "combined": "Matt Hyra / Cryptozoic Entertainment"
+      },
+      {
+        "designers": "Prospero Hall",
+        "publishers": "Funko Games",
+        "pair_count": 49,
+        "average_rating": 7.07,
+        "combined": "Prospero Hall / Funko Games"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "KOSMOS",
+        "pair_count": 48,
+        "average_rating": 7.02,
+        "combined": "Inka Brand / KOSMOS"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "KOSMOS",
+        "pair_count": 48,
+        "average_rating": 7.02,
+        "combined": "Markus Brand / KOSMOS"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "999 Games",
+        "pair_count": 45,
+        "average_rating": 6.68,
+        "combined": "Reiner Knizia / 999 Games"
+      },
+      {
+        "designers": "Dean Essig",
+        "publishers": "Multi-Man Publishing",
+        "pair_count": 44,
+        "average_rating": 7.87,
+        "combined": "Dean Essig / Multi-Man Publishing"
+      },
+      {
+        "designers": "D. Brad Talton Jr.",
+        "publishers": "Level 99 Games",
+        "pair_count": 43,
+        "average_rating": 7.48,
+        "combined": "D. Brad Talton Jr. / Level 99 Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "KOSMOS",
+        "pair_count": 41,
+        "average_rating": 6.44,
+        "combined": "Reiner Knizia / KOSMOS"
+      },
+      {
+        "designers": "Frédéric Bey",
+        "publishers": "Vae Victis",
+        "pair_count": 41,
+        "average_rating": 7.4,
+        "combined": "Frédéric Bey / Vae Victis"
+      },
+      {
+        "designers": "Michael Bennighof",
+        "publishers": "Avalanche Press Ltd.",
+        "pair_count": 41,
+        "average_rating": 6.91,
+        "combined": "Michael Bennighof / Avalanche Press Ltd."
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Ravensburger",
+        "pair_count": 39,
+        "average_rating": 6.27,
+        "combined": "Reiner Knizia / Ravensburger"
+      },
+      {
+        "designers": "Ted Alspach",
+        "publishers": "Bézier Games",
+        "pair_count": 38,
+        "average_rating": 6.94,
+        "combined": "Ted Alspach / Bézier Games"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "999 Games",
+        "pair_count": 36,
+        "average_rating": 6.75,
+        "combined": "Klaus Teuber / 999 Games"
+      },
+      {
+        "designers": "Nicolas Stratigos",
+        "publishers": "Vae Victis",
+        "pair_count": 36,
+        "average_rating": 6.77,
+        "combined": "Nicolas Stratigos / Vae Victis"
+      },
+      {
+        "designers": "Corné van Moorsel",
+        "publishers": "Cwali",
+        "pair_count": 36,
+        "average_rating": 6.42,
+        "combined": "Corné van Moorsel / Cwali"
+      },
+      {
+        "designers": "Paul Rohrbaugh",
+        "publishers": "LPS Inc.",
+        "pair_count": 36,
+        "average_rating": 6.15,
+        "combined": "Paul Rohrbaugh / LPS Inc."
+      },
+      {
+        "designers": "Urs Hostettler",
+        "publishers": "Fata Morgana Spiele",
+        "pair_count": 36,
+        "average_rating": 6.78,
+        "combined": "Urs Hostettler / Fata Morgana Spiele"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Piatnik",
+        "pair_count": 34,
+        "average_rating": 6.28,
+        "combined": "Reiner Knizia / Piatnik"
+      },
+      {
+        "designers": "Brian L. Knipple",
+        "publishers": "Avalanche Press Ltd.",
+        "pair_count": 34,
+        "average_rating": 6.4,
+        "combined": "Brian L. Knipple / Avalanche Press Ltd."
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 34,
+        "average_rating": 6.3,
+        "combined": "Steve Jackson (I) / Pegasus Spiele"
+      },
+      {
+        "designers": "Dan Verssen",
+        "publishers": "Dan Verssen Games (DVG)",
+        "pair_count": 34,
+        "average_rating": 6.99,
+        "combined": "Dan Verssen / Dan Verssen Games (DVG)"
+      },
+      {
+        "designers": "Mike Elliott",
+        "publishers": "WizKids (I)",
+        "pair_count": 33,
+        "average_rating": 7.1,
+        "combined": "Mike Elliott / WizKids (I)"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "999 Games",
+        "pair_count": 33,
+        "average_rating": 7.04,
+        "combined": "Inka Brand / 999 Games"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "IELLO",
+        "pair_count": 33,
+        "average_rating": 7.11,
+        "combined": "Markus Brand / IELLO"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "999 Games",
+        "pair_count": 33,
+        "average_rating": 7.04,
+        "combined": "Markus Brand / 999 Games"
+      },
+      {
+        "designers": "Scott Almes",
+        "publishers": "Gamelyn Games",
+        "pair_count": 33,
+        "average_rating": 7.06,
+        "combined": "Scott Almes / Gamelyn Games"
+      },
+      {
+        "designers": "John Clowdus",
+        "publishers": "Small Box Games",
+        "pair_count": 33,
+        "average_rating": 6.6,
+        "combined": "John Clowdus / Small Box Games"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Hans im Glück",
+        "pair_count": 33,
+        "average_rating": 7.26,
+        "combined": "Klaus-Jürgen Wrede / Hans im Glück"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "IELLO",
+        "pair_count": 33,
+        "average_rating": 7.11,
+        "combined": "Inka Brand / IELLO"
+      },
+      {
+        "designers": "Rory O'Connor",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 32,
+        "average_rating": 6.58,
+        "combined": "Rory O'Connor / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Mayfair Games",
+        "pair_count": 32,
+        "average_rating": 6.61,
+        "combined": "Klaus Teuber / Mayfair Games"
+      },
+      {
+        "designers": "Christian T. Petersen",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 32,
+        "average_rating": 6.63,
+        "combined": "Christian T. Petersen / Fantasy Flight Games"
+      },
+      {
+        "designers": "Tom Dalgliesh",
+        "publishers": "Columbia Games",
+        "pair_count": 31,
+        "average_rating": 6.94,
+        "combined": "Tom Dalgliesh / Columbia Games"
+      },
+      {
+        "designers": "Grant Wylie",
+        "publishers": "Worthington Publishing LLC",
+        "pair_count": 31,
+        "average_rating": 7.18,
+        "combined": "Grant Wylie / Worthington Publishing LLC"
+      },
+      {
+        "designers": "Kevin Zucker",
+        "publishers": "OSG (Operational Studies Group)",
+        "pair_count": 30,
+        "average_rating": 7.61,
+        "combined": "Kevin Zucker / OSG (Operational Studies Group)"
+      },
+      {
+        "designers": "Cephas Howard",
+        "publishers": "LEGO",
+        "pair_count": 30,
+        "average_rating": 5.53,
+        "combined": "Cephas Howard / LEGO"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Devir",
+        "pair_count": 30,
+        "average_rating": 7.06,
+        "combined": "Markus Brand / Devir"
+      },
+      {
+        "designers": "Amabel Holland",
+        "publishers": "Hollandspiele",
+        "pair_count": 30,
+        "average_rating": 7.18,
+        "combined": "Amabel Holland / Hollandspiele"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Edge Entertainment",
+        "pair_count": 30,
+        "average_rating": 7.39,
+        "combined": "Eric M. Lang / Edge Entertainment"
+      },
+      {
+        "designers": "Mike Wylie",
+        "publishers": "Worthington Publishing LLC",
+        "pair_count": 30,
+        "average_rating": 7.13,
+        "combined": "Mike Wylie / Worthington Publishing LLC"
+      },
+      {
+        "designers": "Urs Hostettler",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 30,
+        "average_rating": 6.75,
+        "combined": "Urs Hostettler / ABACUSSPIELE"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Rio Grande Games",
+        "pair_count": 30,
+        "average_rating": 6.62,
+        "combined": "Reiner Knizia / Rio Grande Games"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Devir",
+        "pair_count": 30,
+        "average_rating": 7.06,
+        "combined": "Inka Brand / Devir"
+      },
+      {
+        "designers": "Dirk Henn",
+        "publishers": "Queen Games",
+        "pair_count": 30,
+        "average_rating": 6.91,
+        "combined": "Dirk Henn / Queen Games"
+      },
+      {
+        "designers": "Jervis Johnson",
+        "publishers": "Games Workshop Ltd.",
+        "pair_count": 30,
+        "average_rating": 6.75,
+        "combined": "Jervis Johnson / Games Workshop Ltd."
+      },
+      {
+        "designers": "Justin Gary",
+        "publishers": "Stone Blade Entertainment",
+        "pair_count": 30,
+        "average_rating": 7.5,
+        "combined": "Justin Gary / Stone Blade Entertainment"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 29,
+        "average_rating": 6.51,
+        "combined": "Reiner Knizia / Fantasy Flight Games"
+      },
+      {
+        "designers": "John Bohrer",
+        "publishers": "Winsome Games",
+        "pair_count": 29,
+        "average_rating": 6.87,
+        "combined": "John Bohrer / Winsome Games"
+      },
+      {
+        "designers": "Rory O'Connor",
+        "publishers": "The Creativity Hub",
+        "pair_count": 29,
+        "average_rating": 6.59,
+        "combined": "Rory O'Connor / The Creativity Hub"
+      },
+      {
+        "designers": "Ty Bomba",
+        "publishers": "Kokusai-Tsushin Co. Ltd.",
+        "pair_count": 29,
+        "average_rating": 6.53,
+        "combined": "Ty Bomba / Kokusai-Tsushin Co. Ltd."
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "WizKids (I)",
+        "pair_count": 29,
+        "average_rating": 7.15,
+        "combined": "Eric M. Lang / WizKids (I)"
+      },
+      {
+        "designers": "Mark Herman",
+        "publishers": "GMT Games",
+        "pair_count": 29,
+        "average_rating": 7.55,
+        "combined": "Mark Herman / GMT Games"
+      },
+      {
+        "designers": "Redmond A. Simonsen",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 28,
+        "average_rating": 6.17,
+        "combined": "Redmond A. Simonsen / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Chris Perello",
+        "publishers": "Decision Games (I)",
+        "pair_count": 28,
+        "average_rating": 6.43,
+        "combined": "Chris Perello / Decision Games (I)"
+      },
+      {
+        "designers": "Wolfgang Kramer",
+        "publishers": "Ravensburger",
+        "pair_count": 28,
+        "average_rating": 6.55,
+        "combined": "Wolfgang Kramer / Ravensburger"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Lookout Games",
+        "pair_count": 27,
+        "average_rating": 6.98,
+        "combined": "Uwe Rosenberg / Lookout Games"
+      },
+      {
+        "designers": "Ignacy Trzewiczek",
+        "publishers": "Portal Games",
+        "pair_count": 27,
+        "average_rating": 6.98,
+        "combined": "Ignacy Trzewiczek / Portal Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Egmont Polska",
+        "pair_count": 27,
+        "average_rating": 6.31,
+        "combined": "Reiner Knizia / Egmont Polska"
+      },
+      {
+        "designers": "John Young",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 26,
+        "average_rating": 6.56,
+        "combined": "John Young / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Steve Finn",
+        "publishers": "Dr. Finn's Games",
+        "pair_count": 26,
+        "average_rating": 6.79,
+        "combined": "Steve Finn / Dr. Finn's Games"
+      },
+      {
+        "designers": "Phil Eklund",
+        "publishers": "Sierra Madre Games",
+        "pair_count": 26,
+        "average_rating": 7.2,
+        "combined": "Phil Eklund / Sierra Madre Games"
+      },
+      {
+        "designers": "Marc W. Miller",
+        "publishers": "Game Designers' Workshop (GDW Games)",
+        "pair_count": 25,
+        "average_rating": 6.33,
+        "combined": "Marc W. Miller / Game Designers' Workshop (GDW Games)"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "Nürnberger-Spielkarten-Verlag",
+        "pair_count": 25,
+        "average_rating": 6.35,
+        "combined": "Reinhard Staupe / Nürnberger-Spielkarten-Verlag"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Hobby Japan",
+        "pair_count": 25,
+        "average_rating": 7.34,
+        "combined": "Uwe Rosenberg / Hobby Japan"
+      },
+      {
+        "designers": "Frédéric Henry",
+        "publishers": "Asmodee",
+        "pair_count": 25,
+        "average_rating": 6.59,
+        "combined": "Frédéric Henry / Asmodee"
+      },
+      {
+        "designers": "Rob Daviau",
+        "publishers": "Hasbro",
+        "pair_count": 25,
+        "average_rating": 6.38,
+        "combined": "Rob Daviau / Hasbro"
+      },
+      {
+        "designers": "Wolfgang Kramer",
+        "publishers": "AMIGO",
+        "pair_count": 25,
+        "average_rating": 6.4,
+        "combined": "Wolfgang Kramer / AMIGO"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 25,
+        "average_rating": 7.33,
+        "combined": "Corey Konieczka / Fantasy Flight Games"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "Edge Entertainment",
+        "pair_count": 25,
+        "average_rating": 6.58,
+        "combined": "Friedemann Friese / Edge Entertainment"
+      },
+      {
+        "designers": "Funko Games",
+        "publishers": "Funko Games",
+        "pair_count": 25,
+        "average_rating": 6.32,
+        "combined": "Funko Games / Funko Games"
+      },
+      {
+        "designers": "Ty Bomba",
+        "publishers": "XTR Corp",
+        "pair_count": 25,
+        "average_rating": 6.25,
+        "combined": "Ty Bomba / XTR Corp"
+      },
+      {
+        "designers": "Rob Daviau",
+        "publishers": "Restoration Games",
+        "pair_count": 24,
+        "average_rating": 7.77,
+        "combined": "Rob Daviau / Restoration Games"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "999 Games",
+        "pair_count": 24,
+        "average_rating": 7.11,
+        "combined": "Klaus-Jürgen Wrede / 999 Games"
+      },
+      {
+        "designers": "Martin Wallace",
+        "publishers": "Treefrog Games",
+        "pair_count": 24,
+        "average_rating": 6.92,
+        "combined": "Martin Wallace / Treefrog Games"
+      },
+      {
+        "designers": "Hisashi Hayashi",
+        "publishers": "OKAZU Brand",
+        "pair_count": 24,
+        "average_rating": 6.57,
+        "combined": "Hisashi Hayashi / OKAZU Brand"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "AMIGO",
+        "pair_count": 24,
+        "average_rating": 5.97,
+        "combined": "Reinhard Staupe / AMIGO"
+      },
+      {
+        "designers": "Justin D. Jacobson",
+        "publishers": "Restoration Games",
+        "pair_count": 24,
+        "average_rating": 7.77,
+        "combined": "Justin D. Jacobson / Restoration Games"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "Rio Grande Games",
+        "pair_count": 24,
+        "average_rating": 6.65,
+        "combined": "Friedemann Friese / Rio Grande Games"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "Arclight Games",
+        "pair_count": 24,
+        "average_rating": 6.63,
+        "combined": "Friedemann Friese / Arclight Games"
+      },
+      {
+        "designers": "Michael Schacht",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 23,
+        "average_rating": 6.4,
+        "combined": "Michael Schacht / ABACUSSPIELE"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Kaissa Chess & Games",
+        "pair_count": 23,
+        "average_rating": 6.59,
+        "combined": "Reiner Knizia / Kaissa Chess & Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "AMIGO",
+        "pair_count": 23,
+        "average_rating": 6.45,
+        "combined": "Reiner Knizia / AMIGO"
+      },
+      {
+        "designers": "Ryan Laukat",
+        "publishers": "Red Raven Games",
+        "pair_count": 23,
+        "average_rating": 7.28,
+        "combined": "Ryan Laukat / Red Raven Games"
+      },
+      {
+        "designers": "Craig Van Ness",
+        "publishers": "Hasbro",
+        "pair_count": 23,
+        "average_rating": 6.49,
+        "combined": "Craig Van Ness / Hasbro"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "DV Games",
+        "pair_count": 23,
+        "average_rating": 6.67,
+        "combined": "Martino Chiacchiera / DV Games"
+      },
+      {
+        "designers": "Chris Handy (I)",
+        "publishers": "Perplext",
+        "pair_count": 23,
+        "average_rating": 6.22,
+        "combined": "Chris Handy (I) / Perplext"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Czech Games Edition",
+        "pair_count": 23,
+        "average_rating": 7.14,
+        "combined": "Vlaada Chvátil / Czech Games Edition"
+      },
+      {
+        "designers": "Brian Yu",
+        "publishers": "Mattel Inc.",
+        "pair_count": 23,
+        "average_rating": 5.68,
+        "combined": "Brian Yu / Mattel Inc."
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Devir",
+        "pair_count": 22,
+        "average_rating": 6.96,
+        "combined": "Klaus Teuber / Devir"
+      },
+      {
+        "designers": "Martin Wallace",
+        "publishers": "Warfrog Games",
+        "pair_count": 22,
+        "average_rating": 6.89,
+        "combined": "Martin Wallace / Warfrog Games"
+      },
+      {
+        "designers": "Haim Shafir",
+        "publishers": "AMIGO",
+        "pair_count": 22,
+        "average_rating": 5.85,
+        "combined": "Haim Shafir / AMIGO"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "999 Games",
+        "pair_count": 22,
+        "average_rating": 7.16,
+        "combined": "Uwe Rosenberg / 999 Games"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "GDM Games",
+        "pair_count": 21,
+        "average_rating": 6.88,
+        "combined": "Josep Izquierdo Sánchez / GDM Games"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 21,
+        "average_rating": 6.58,
+        "combined": "Martino Chiacchiera / ABACUSSPIELE"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Zvezda",
+        "pair_count": 21,
+        "average_rating": 7.12,
+        "combined": "Markus Brand / Zvezda"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "GDM Games",
+        "pair_count": 21,
+        "average_rating": 6.88,
+        "combined": "Martí Lucas Feliu / GDM Games"
+      },
+      {
+        "designers": "Seiji Kanai",
+        "publishers": "Alderac Entertainment Group",
+        "pair_count": 21,
+        "average_rating": 6.71,
+        "combined": "Seiji Kanai / Alderac Entertainment Group"
+      },
+      {
+        "designers": "Steffen Benndorf",
+        "publishers": "Nürnberger-Spielkarten-Verlag",
+        "pair_count": 21,
+        "average_rating": 6.51,
+        "combined": "Steffen Benndorf / Nürnberger-Spielkarten-Verlag"
+      },
+      {
+        "designers": "Kerry Breitenstein",
+        "publishers": "Twilight Creations Inc.",
+        "pair_count": 21,
+        "average_rating": 5.44,
+        "combined": "Kerry Breitenstein / Twilight Creations Inc."
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Zvezda",
+        "pair_count": 21,
+        "average_rating": 7.12,
+        "combined": "Inka Brand / Zvezda"
+      },
+      {
+        "designers": "Rick Priestley",
+        "publishers": "Games Workshop Ltd.",
+        "pair_count": 21,
+        "average_rating": 7,
+        "combined": "Rick Priestley / Games Workshop Ltd."
+      },
+      {
+        "designers": "Paul Rohrbaugh",
+        "publishers": "Against the Odds",
+        "pair_count": 21,
+        "average_rating": 6.41,
+        "combined": "Paul Rohrbaugh / Against the Odds"
+      },
+      {
+        "designers": "Thierry Denoual",
+        "publishers": "Blue Orange Games",
+        "pair_count": 21,
+        "average_rating": 5.86,
+        "combined": "Thierry Denoual / Blue Orange Games"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "AMIGO",
+        "pair_count": 21,
+        "average_rating": 6.35,
+        "combined": "Uwe Rosenberg / AMIGO"
+      },
+      {
+        "designers": "Lorenzo Silva",
+        "publishers": "Horrible Guild",
+        "pair_count": 20,
+        "average_rating": 7.35,
+        "combined": "Lorenzo Silva / Horrible Guild"
+      },
+      {
+        "designers": "Robert G. Markham",
+        "publishers": "3W (World Wide Wargames)",
+        "pair_count": 20,
+        "average_rating": 6.03,
+        "combined": "Robert G. Markham / 3W (World Wide Wargames)"
+      },
+      {
+        "designers": "Steffen Benndorf",
+        "publishers": "White Goblin Games",
+        "pair_count": 20,
+        "average_rating": 6.63,
+        "combined": "Steffen Benndorf / White Goblin Games"
+      },
+      {
+        "designers": "Alan R. Moon",
+        "publishers": "Days of Wonder",
+        "pair_count": 20,
+        "average_rating": 7.34,
+        "combined": "Alan R. Moon / Days of Wonder"
+      },
+      {
+        "designers": "Jason Tagmire",
+        "publishers": "Button Shy",
+        "pair_count": 20,
+        "average_rating": 6.19,
+        "combined": "Jason Tagmire / Button Shy"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "CMON Global Limited",
+        "pair_count": 20,
+        "average_rating": 7.79,
+        "combined": "Eric M. Lang / CMON Global Limited"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Wargames Club Publishing",
+        "pair_count": 20,
+        "average_rating": 6.62,
+        "combined": "Reiner Knizia / Wargames Club Publishing"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "Lifestyle Boardgames Ltd",
+        "pair_count": 20,
+        "average_rating": 6.89,
+        "combined": "Josep Izquierdo Sánchez / Lifestyle Boardgames Ltd"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "Lifestyle Boardgames Ltd",
+        "pair_count": 20,
+        "average_rating": 6.89,
+        "combined": "Martí Lucas Feliu / Lifestyle Boardgames Ltd"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Devir",
+        "pair_count": 20,
+        "average_rating": 6.64,
+        "combined": "Reiner Knizia / Devir"
+      },
+      {
+        "designers": "Marco Donadoni",
+        "publishers": "International Team (I)",
+        "pair_count": 19,
+        "average_rating": 6.18,
+        "combined": "Marco Donadoni / International Team (I)"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Giochi Uniti",
+        "pair_count": 19,
+        "average_rating": 7.13,
+        "combined": "Inka Brand / Giochi Uniti"
+      },
+      {
+        "designers": "Prospero Hall",
+        "publishers": "Ravensburger",
+        "pair_count": 19,
+        "average_rating": 6.94,
+        "combined": "Prospero Hall / Ravensburger"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 19,
+        "average_rating": 6.88,
+        "combined": "Kevin Wilson / Fantasy Flight Games"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Giochi Uniti",
+        "pair_count": 19,
+        "average_rating": 7.13,
+        "combined": "Markus Brand / Giochi Uniti"
+      },
+      {
+        "designers": "Michael Palm",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 19,
+        "average_rating": 6.18,
+        "combined": "Michael Palm / Pegasus Spiele"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 19,
+        "average_rating": 6.89,
+        "combined": "Josep Izquierdo Sánchez / ABACUSSPIELE"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 19,
+        "average_rating": 6.89,
+        "combined": "Martí Lucas Feliu / ABACUSSPIELE"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Edge Entertainment",
+        "pair_count": 19,
+        "average_rating": 7.59,
+        "combined": "Corey Konieczka / Edge Entertainment"
+      },
+      {
+        "designers": "Cory Jones",
+        "publishers": "Cryptozoic Entertainment",
+        "pair_count": 19,
+        "average_rating": 6.59,
+        "combined": "Cory Jones / Cryptozoic Entertainment"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "DV Games",
+        "pair_count": 19,
+        "average_rating": 6.49,
+        "combined": "Silvano Sorrentino / DV Games"
+      },
+      {
+        "designers": "Reinhold Wittig",
+        "publishers": "Edition Perlhuhn (Göttinger Spiele)",
+        "pair_count": 18,
+        "average_rating": 5.51,
+        "combined": "Reinhold Wittig / Edition Perlhuhn (Göttinger Spiele)"
+      },
+      {
+        "designers": "Florent Coupeau",
+        "publishers": "Vae Victis",
+        "pair_count": 18,
+        "average_rating": 7.09,
+        "combined": "Florent Coupeau / Vae Victis"
+      },
+      {
+        "designers": "Jordan Weisman",
+        "publishers": "FASA",
+        "pair_count": 18,
+        "average_rating": 6.42,
+        "combined": "Jordan Weisman / FASA"
+      },
+      {
+        "designers": "Paul Peterson",
+        "publishers": "Alderac Entertainment Group",
+        "pair_count": 18,
+        "average_rating": 7.19,
+        "combined": "Paul Peterson / Alderac Entertainment Group"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Brädspel.se",
+        "pair_count": 18,
+        "average_rating": 7.18,
+        "combined": "Markus Brand / Brädspel.se"
+      },
+      {
+        "designers": "Simone Luciani",
+        "publishers": "Cranio Creations",
+        "pair_count": 18,
+        "average_rating": 6.95,
+        "combined": "Simone Luciani / Cranio Creations"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Brädspel.se",
+        "pair_count": 18,
+        "average_rating": 7.18,
+        "combined": "Inka Brand / Brädspel.se"
+      },
+      {
+        "designers": "Jun Sasaki",
+        "publishers": "Oink Games",
+        "pair_count": 18,
+        "average_rating": 6.44,
+        "combined": "Jun Sasaki / Oink Games"
+      },
+      {
+        "designers": "Nate Chatellier",
+        "publishers": "Roxley",
+        "pair_count": 18,
+        "average_rating": 7.89,
+        "combined": "Nate Chatellier / Roxley"
+      },
+      {
+        "designers": "Michael Rieneck",
+        "publishers": "KOSMOS",
+        "pair_count": 18,
+        "average_rating": 6.3,
+        "combined": "Michael Rieneck / KOSMOS"
+      },
+      {
+        "designers": "Chris Cieslik",
+        "publishers": "Asmadi Games",
+        "pair_count": 18,
+        "average_rating": 6.05,
+        "combined": "Chris Cieslik / Asmadi Games"
+      },
+      {
+        "designers": "Wolfgang Kramer",
+        "publishers": "Rio Grande Games",
+        "pair_count": 18,
+        "average_rating": 6.71,
+        "combined": "Wolfgang Kramer / Rio Grande Games"
+      },
+      {
+        "designers": "Chris Handy (I)",
+        "publishers": "One Moment Games",
+        "pair_count": 18,
+        "average_rating": 6.04,
+        "combined": "Chris Handy (I) / One Moment Games"
+      },
+      {
+        "designers": "Irad B. Hardy",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 18,
+        "average_rating": 6.47,
+        "combined": "Irad B. Hardy / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Manny Trembley",
+        "publishers": "Roxley",
+        "pair_count": 18,
+        "average_rating": 7.89,
+        "combined": "Manny Trembley / Roxley"
+      },
+      {
+        "designers": "Phil Kendall",
+        "publishers": "Ragnar Brothers",
+        "pair_count": 18,
+        "average_rating": 6.7,
+        "combined": "Phil Kendall / Ragnar Brothers"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 18,
+        "average_rating": 6.46,
+        "combined": "Reiner Knizia / Pegasus Spiele"
+      },
+      {
+        "designers": "Lukas Zach",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 18,
+        "average_rating": 6.22,
+        "combined": "Lukas Zach / Pegasus Spiele"
+      },
+      {
+        "designers": "Joris Wiersinga",
+        "publishers": "Splotter Spellen",
+        "pair_count": 17,
+        "average_rating": 6.88,
+        "combined": "Joris Wiersinga / Splotter Spellen"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Dino Toys s. r. o.",
+        "pair_count": 17,
+        "average_rating": 7.12,
+        "combined": "Inka Brand / Dino Toys s. r. o."
+      },
+      {
+        "designers": "Spartaco Albertarelli",
+        "publishers": "Editrice Giochi",
+        "pair_count": 17,
+        "average_rating": 6.22,
+        "combined": "Spartaco Albertarelli / Editrice Giochi"
+      },
+      {
+        "designers": "Steve Kendall",
+        "publishers": "Ragnar Brothers",
+        "pair_count": 17,
+        "average_rating": 6.62,
+        "combined": "Steve Kendall / Ragnar Brothers"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 17,
+        "average_rating": 6.58,
+        "combined": "Silvano Sorrentino / ABACUSSPIELE"
+      },
+      {
+        "designers": "Jason Glover",
+        "publishers": "Grey Gnome Games",
+        "pair_count": 17,
+        "average_rating": 6.75,
+        "combined": "Jason Glover / Grey Gnome Games"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "White Goblin Games",
+        "pair_count": 17,
+        "average_rating": 6.54,
+        "combined": "Reinhard Staupe / White Goblin Games"
+      },
+      {
+        "designers": "Elan Lee",
+        "publishers": "Exploding Kittens",
+        "pair_count": 17,
+        "average_rating": 6.47,
+        "combined": "Elan Lee / Exploding Kittens"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Rio Grande Games",
+        "pair_count": 17,
+        "average_rating": 6.9,
+        "combined": "Klaus-Jürgen Wrede / Rio Grande Games"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Dino Toys s. r. o.",
+        "pair_count": 17,
+        "average_rating": 7.12,
+        "combined": "Markus Brand / Dino Toys s. r. o."
+      },
+      {
+        "designers": "Gunter Baars",
+        "publishers": "Ravensburger",
+        "pair_count": 17,
+        "average_rating": 5.47,
+        "combined": "Gunter Baars / Ravensburger"
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Raven Distribution",
+        "pair_count": 17,
+        "average_rating": 6.18,
+        "combined": "Steve Jackson (I) / Raven Distribution"
+      },
+      {
+        "designers": "Jason C. Hill",
+        "publishers": "Flying Frog Productions",
+        "pair_count": 17,
+        "average_rating": 7.8,
+        "combined": "Jason C. Hill / Flying Frog Productions"
+      },
+      {
+        "designers": "David A. Powell",
+        "publishers": "The Gamers",
+        "pair_count": 17,
+        "average_rating": 7.36,
+        "combined": "David A. Powell / The Gamers"
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Hobby World",
+        "pair_count": 17,
+        "average_rating": 6.18,
+        "combined": "Steve Jackson (I) / Hobby World"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 17,
+        "average_rating": 7.43,
+        "combined": "Corey Konieczka / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Black Monk",
+        "pair_count": 17,
+        "average_rating": 6.22,
+        "combined": "Steve Jackson (I) / Black Monk"
+      },
+      {
+        "designers": "David Sirlin",
+        "publishers": "Sirlin Games",
+        "pair_count": 17,
+        "average_rating": 7.14,
+        "combined": "David Sirlin / Sirlin Games"
+      },
+      {
+        "designers": "Ray Tapio",
+        "publishers": "Critical Hit Inc.",
+        "pair_count": 16,
+        "average_rating": 7.46,
+        "combined": "Ray Tapio / Critical Hit Inc."
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 16,
+        "average_rating": 7.11,
+        "combined": "Bruno Cathala / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Hobby World",
+        "pair_count": 16,
+        "average_rating": 7.28,
+        "combined": "Klaus-Jürgen Wrede / Hobby World"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "Geekach Games",
+        "pair_count": 16,
+        "average_rating": 6.89,
+        "combined": "Josep Izquierdo Sánchez / Geekach Games"
+      },
+      {
+        "designers": "Eduardo Baraf",
+        "publishers": "Pencil First Games LLC",
+        "pair_count": 16,
+        "average_rating": 6.98,
+        "combined": "Eduardo Baraf / Pencil First Games LLC"
+      },
+      {
+        "designers": "Kristian Amundsen Østby",
+        "publishers": "Aporta Games",
+        "pair_count": 16,
+        "average_rating": 7.06,
+        "combined": "Kristian Amundsen Østby / Aporta Games"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Galakta",
+        "pair_count": 16,
+        "average_rating": 7.52,
+        "combined": "Corey Konieczka / Galakta"
+      },
+      {
+        "designers": "Gary Dicken",
+        "publishers": "Ragnar Brothers",
+        "pair_count": 16,
+        "average_rating": 6.53,
+        "combined": "Gary Dicken / Ragnar Brothers"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "Stronghold Games",
+        "pair_count": 16,
+        "average_rating": 6.44,
+        "combined": "Friedemann Friese / Stronghold Games"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "Playroom Entertainment",
+        "pair_count": 16,
+        "average_rating": 5.85,
+        "combined": "Reinhard Staupe / Playroom Entertainment"
+      },
+      {
+        "designers": "Forrest-Pruzan Creative",
+        "publishers": "Wonder Forge",
+        "pair_count": 16,
+        "average_rating": 6.06,
+        "combined": "Forrest-Pruzan Creative / Wonder Forge"
+      },
+      {
+        "designers": "Peter Lee",
+        "publishers": "Wizards of the Coast",
+        "pair_count": 16,
+        "average_rating": 7.38,
+        "combined": "Peter Lee / Wizards of the Coast"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "Geekach Games",
+        "pair_count": 16,
+        "average_rating": 6.89,
+        "combined": "Martí Lucas Feliu / Geekach Games"
+      },
+      {
+        "designers": "Marsha J. Falco",
+        "publishers": "Set Enterprises Inc.",
+        "pair_count": 16,
+        "average_rating": 5.64,
+        "combined": "Marsha J. Falco / Set Enterprises Inc."
+      },
+      {
+        "designers": "Daniel Mandel",
+        "publishers": "Upper Deck Entertainment",
+        "pair_count": 16,
+        "average_rating": 7.32,
+        "combined": "Daniel Mandel / Upper Deck Entertainment"
+      },
+      {
+        "designers": "Grant Wylie",
+        "publishers": "Worthington Games",
+        "pair_count": 16,
+        "average_rating": 7.01,
+        "combined": "Grant Wylie / Worthington Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Lautapelit.fi",
+        "pair_count": 16,
+        "average_rating": 6.83,
+        "combined": "Reiner Knizia / Lautapelit.fi"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 15,
+        "average_rating": 6.82,
+        "combined": "Eric M. Lang / Fantasy Flight Games"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Galápagos Jogos",
+        "pair_count": 15,
+        "average_rating": 7.39,
+        "combined": "Eric M. Lang / Galápagos Jogos"
+      },
+      {
+        "designers": "Craig Van Ness",
+        "publishers": "Milton Bradley",
+        "pair_count": 15,
+        "average_rating": 6.12,
+        "combined": "Craig Van Ness / Milton Bradley"
+      },
+      {
+        "designers": "Todd Breitenstein",
+        "publishers": "Twilight Creations Inc.",
+        "pair_count": 15,
+        "average_rating": 5.61,
+        "combined": "Todd Breitenstein / Twilight Creations Inc."
+      },
+      {
+        "designers": "Brian Hersch",
+        "publishers": "Hersch and Company",
+        "pair_count": 15,
+        "average_rating": 5.77,
+        "combined": "Brian Hersch / Hersch and Company"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Group SNE",
+        "pair_count": 15,
+        "average_rating": 6.47,
+        "combined": "Reiner Knizia / Group SNE"
+      },
+      {
+        "designers": "Stefan Feld",
+        "publishers": "Ravensburger",
+        "pair_count": 15,
+        "average_rating": 7.47,
+        "combined": "Stefan Feld / Ravensburger"
+      },
+      {
+        "designers": "Max J. Kobbert",
+        "publishers": "Ravensburger",
+        "pair_count": 15,
+        "average_rating": 5.92,
+        "combined": "Max J. Kobbert / Ravensburger"
+      },
+      {
+        "designers": "Grzegorz Rejchtman",
+        "publishers": "KOSMOS",
+        "pair_count": 15,
+        "average_rating": 6.42,
+        "combined": "Grzegorz Rejchtman / KOSMOS"
+      },
+      {
+        "designers": "Wolfgang Kramer",
+        "publishers": "999 Games",
+        "pair_count": 15,
+        "average_rating": 6.67,
+        "combined": "Wolfgang Kramer / 999 Games"
+      },
+      {
+        "designers": "Haim Shafir",
+        "publishers": "999 Games",
+        "pair_count": 15,
+        "average_rating": 5.91,
+        "combined": "Haim Shafir / 999 Games"
+      },
+      {
+        "designers": "Stefan Feld",
+        "publishers": "alea",
+        "pair_count": 15,
+        "average_rating": 7.5,
+        "combined": "Stefan Feld / alea"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "ABACUSSPIELE",
+        "pair_count": 15,
+        "average_rating": 6.62,
+        "combined": "Reiner Knizia / ABACUSSPIELE"
+      },
+      {
+        "designers": "Stephen V. Cole",
+        "publishers": "Task Force Games",
+        "pair_count": 15,
+        "average_rating": 6.81,
+        "combined": "Stephen V. Cole / Task Force Games"
+      },
+      {
+        "designers": "Richard H. Berg",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 15,
+        "average_rating": 6.75,
+        "combined": "Richard H. Berg / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Michael Kiesling",
+        "publishers": "Ravensburger",
+        "pair_count": 15,
+        "average_rating": 6.79,
+        "combined": "Michael Kiesling / Ravensburger"
+      },
+      {
+        "designers": "Ben Cichoski",
+        "publishers": "Upper Deck Entertainment",
+        "pair_count": 15,
+        "average_rating": 7.32,
+        "combined": "Ben Cichoski / Upper Deck Entertainment"
+      },
+      {
+        "designers": "Josh J. Carlson",
+        "publishers": "Chip Theory Games",
+        "pair_count": 15,
+        "average_rating": 7.77,
+        "combined": "Josh J. Carlson / Chip Theory Games"
+      },
+      {
+        "designers": "Jordan Draper",
+        "publishers": "Jordan Draper Games",
+        "pair_count": 15,
+        "average_rating": 6.74,
+        "combined": "Jordan Draper / Jordan Draper Games"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Lifestyle Boardgames Ltd",
+        "pair_count": 15,
+        "average_rating": 7,
+        "combined": "Bruno Cathala / Lifestyle Boardgames Ltd"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Korea Boardgames Co. Ltd.",
+        "pair_count": 15,
+        "average_rating": 6.95,
+        "combined": "Reiner Knizia / Korea Boardgames Co. Ltd."
+      },
+      {
+        "designers": "Matthew Inman",
+        "publishers": "Exploding Kittens",
+        "pair_count": 15,
+        "average_rating": 6.48,
+        "combined": "Matthew Inman / Exploding Kittens"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 15,
+        "average_rating": 7.27,
+        "combined": "Vlaada Chvátil / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "IELLO",
+        "pair_count": 15,
+        "average_rating": 7.36,
+        "combined": "Vlaada Chvátil / IELLO"
+      },
+      {
+        "designers": "Shem Phillips",
+        "publishers": "Garphill Games",
+        "pair_count": 15,
+        "average_rating": 7.25,
+        "combined": "Shem Phillips / Garphill Games"
+      },
+      {
+        "designers": "Ted Raicer",
+        "publishers": "GMT Games",
+        "pair_count": 15,
+        "average_rating": 7.34,
+        "combined": "Ted Raicer / GMT Games"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "Gigamic",
+        "pair_count": 15,
+        "average_rating": 6.38,
+        "combined": "Jacques Zeimet / Gigamic"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Edge Entertainment",
+        "pair_count": 15,
+        "average_rating": 6.86,
+        "combined": "Reiner Knizia / Edge Entertainment"
+      },
+      {
+        "designers": "Jay A. Nelson",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 14,
+        "average_rating": 6.65,
+        "combined": "Jay A. Nelson / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Cyril Demaegd",
+        "publishers": "Space Cowboys",
+        "pair_count": 14,
+        "average_rating": 7.16,
+        "combined": "Cyril Demaegd / Space Cowboys"
+      },
+      {
+        "designers": "Paul Peterson",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 14,
+        "average_rating": 7.24,
+        "combined": "Paul Peterson / Pegasus Spiele"
+      },
+      {
+        "designers": "Douglas Niles",
+        "publishers": "Tactical Studies Rules (TSR)",
+        "pair_count": 14,
+        "average_rating": 6.28,
+        "combined": "Douglas Niles / Tactical Studies Rules (TSR)"
+      },
+      {
+        "designers": "Paul Peterson",
+        "publishers": "IELLO",
+        "pair_count": 14,
+        "average_rating": 7.23,
+        "combined": "Paul Peterson / IELLO"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 14,
+        "average_rating": 7.32,
+        "combined": "Vlaada Chvátil / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Leo Colovini",
+        "publishers": "Rio Grande Games",
+        "pair_count": 14,
+        "average_rating": 6.44,
+        "combined": "Leo Colovini / Rio Grande Games"
+      },
+      {
+        "designers": "John Astell",
+        "publishers": "Game Designers' Workshop (GDW Games)",
+        "pair_count": 14,
+        "average_rating": 6.8,
+        "combined": "John Astell / Game Designers' Workshop (GDW Games)"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Galakta",
+        "pair_count": 14,
+        "average_rating": 7.07,
+        "combined": "Reiner Knizia / Galakta"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Spilbræt.dk",
+        "pair_count": 14,
+        "average_rating": 7.18,
+        "combined": "Inka Brand / Spilbræt.dk"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "999 Games",
+        "pair_count": 14,
+        "average_rating": 6.67,
+        "combined": "Martino Chiacchiera / 999 Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Swan Panasia Co. Ltd.",
+        "pair_count": 14,
+        "average_rating": 6.67,
+        "combined": "Reiner Knizia / Swan Panasia Co. Ltd."
+      },
+      {
+        "designers": "Javier Romero",
+        "publishers": "Decision Games (I)",
+        "pair_count": 14,
+        "average_rating": 7.23,
+        "combined": "Javier Romero / Decision Games (I)"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "Albi",
+        "pair_count": 14,
+        "average_rating": 6.58,
+        "combined": "Martino Chiacchiera / Albi"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Devir",
+        "pair_count": 14,
+        "average_rating": 7.36,
+        "combined": "Klaus-Jürgen Wrede / Devir"
+      },
+      {
+        "designers": "Antoine Bauza",
+        "publishers": "Hobby Japan",
+        "pair_count": 14,
+        "average_rating": 7.17,
+        "combined": "Antoine Bauza / Hobby Japan"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Hobby Japan",
+        "pair_count": 14,
+        "average_rating": 6.81,
+        "combined": "Bruno Cathala / Hobby Japan"
+      },
+      {
+        "designers": "Rory O'Connor",
+        "publishers": "HUCH!",
+        "pair_count": 14,
+        "average_rating": 6.56,
+        "combined": "Rory O'Connor / HUCH!"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "MS Edizioni",
+        "pair_count": 14,
+        "average_rating": 6.81,
+        "combined": "Martí Lucas Feliu / MS Edizioni"
+      },
+      {
+        "designers": "Chad Ellis",
+        "publishers": "Your Move Games",
+        "pair_count": 14,
+        "average_rating": 6.98,
+        "combined": "Chad Ellis / Your Move Games"
+      },
+      {
+        "designers": "Richard Garfield",
+        "publishers": "Wizards of the Coast",
+        "pair_count": 14,
+        "average_rating": 6.41,
+        "combined": "Richard Garfield / Wizards of the Coast"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Asmodee",
+        "pair_count": 14,
+        "average_rating": 6.57,
+        "combined": "Bruno Cathala / Asmodee"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Korea Boardgames Co. Ltd.",
+        "pair_count": 14,
+        "average_rating": 7.59,
+        "combined": "Uwe Rosenberg / Korea Boardgames Co. Ltd."
+      },
+      {
+        "designers": "Richard Breese",
+        "publishers": "R&D Games",
+        "pair_count": 14,
+        "average_rating": 6.86,
+        "combined": "Richard Breese / R&D Games"
+      },
+      {
+        "designers": "L. Ross Babcock III",
+        "publishers": "FASA",
+        "pair_count": 14,
+        "average_rating": 6.47,
+        "combined": "L. Ross Babcock III / FASA"
+      },
+      {
+        "designers": "Mike Fitzgerald",
+        "publishers": "Eagle-Gryphon Games",
+        "pair_count": 14,
+        "average_rating": 7.16,
+        "combined": "Mike Fitzgerald / Eagle-Gryphon Games"
+      },
+      {
+        "designers": "Ignacy Trzewiczek",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 14,
+        "average_rating": 7.07,
+        "combined": "Ignacy Trzewiczek / Pegasus Spiele"
+      },
+      {
+        "designers": "Joseph Miranda",
+        "publishers": "Kokusai-Tsushin Co. Ltd.",
+        "pair_count": 14,
+        "average_rating": 6.7,
+        "combined": "Joseph Miranda / Kokusai-Tsushin Co. Ltd."
+      },
+      {
+        "designers": "Frank Chadwick",
+        "publishers": "Kokusai-Tsushin Co. Ltd.",
+        "pair_count": 14,
+        "average_rating": 6.63,
+        "combined": "Frank Chadwick / Kokusai-Tsushin Co. Ltd."
+      },
+      {
+        "designers": "Jeroen Doumen",
+        "publishers": "Splotter Spellen",
+        "pair_count": 14,
+        "average_rating": 7.1,
+        "combined": "Jeroen Doumen / Splotter Spellen"
+      },
+      {
+        "designers": "Luc Olivier",
+        "publishers": "Vae Victis",
+        "pair_count": 14,
+        "average_rating": 6.7,
+        "combined": "Luc Olivier / Vae Victis"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Lacerta",
+        "pair_count": 14,
+        "average_rating": 7.53,
+        "combined": "Uwe Rosenberg / Lacerta"
+      },
+      {
+        "designers": "James Ernest",
+        "publishers": "Truant Spiele",
+        "pair_count": 14,
+        "average_rating": 5.99,
+        "combined": "James Ernest / Truant Spiele"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Spilbræt.dk",
+        "pair_count": 14,
+        "average_rating": 7.18,
+        "combined": "Markus Brand / Spilbræt.dk"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Galakta",
+        "pair_count": 14,
+        "average_rating": 7.01,
+        "combined": "Klaus Teuber / Galakta"
+      },
+      {
+        "designers": "Christian T. Petersen",
+        "publishers": "Edge Entertainment",
+        "pair_count": 14,
+        "average_rating": 7.16,
+        "combined": "Christian T. Petersen / Edge Entertainment"
+      },
+      {
+        "designers": "Andrew Wolf",
+        "publishers": "The Op",
+        "pair_count": 14,
+        "average_rating": 6.87,
+        "combined": "Andrew Wolf / The Op"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "MS Edizioni",
+        "pair_count": 14,
+        "average_rating": 6.81,
+        "combined": "Josep Izquierdo Sánchez / MS Edizioni"
+      },
+      {
+        "designers": "Don Greenwood",
+        "publishers": "The Avalon Hill Game Co",
+        "pair_count": 14,
+        "average_rating": 6.72,
+        "combined": "Don Greenwood / The Avalon Hill Game Co"
+      },
+      {
+        "designers": "Eilif Svensson",
+        "publishers": "Aporta Games",
+        "pair_count": 14,
+        "average_rating": 7.07,
+        "combined": "Eilif Svensson / Aporta Games"
+      },
+      {
+        "designers": "S. Craig Taylor",
+        "publishers": "The Avalon Hill Game Co",
+        "pair_count": 14,
+        "average_rating": 6.52,
+        "combined": "S. Craig Taylor / The Avalon Hill Game Co"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "FoxGames",
+        "pair_count": 13,
+        "average_rating": 6.55,
+        "combined": "Martino Chiacchiera / FoxGames"
+      },
+      {
+        "designers": "Marsha J. Falco",
+        "publishers": "AMIGO",
+        "pair_count": 13,
+        "average_rating": 5.71,
+        "combined": "Marsha J. Falco / AMIGO"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "Mercurio",
+        "pair_count": 13,
+        "average_rating": 6.48,
+        "combined": "Silvano Sorrentino / Mercurio"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Korea Boardgames Co. Ltd.",
+        "pair_count": 13,
+        "average_rating": 7.12,
+        "combined": "Inka Brand / Korea Boardgames Co. Ltd."
+      },
+      {
+        "designers": "Ed Wimble",
+        "publishers": "Clash of Arms Games",
+        "pair_count": 13,
+        "average_rating": 7.58,
+        "combined": "Ed Wimble / Clash of Arms Games"
+      },
+      {
+        "designers": "Wolfgang Panning",
+        "publishers": "Queen Games",
+        "pair_count": 13,
+        "average_rating": 6.81,
+        "combined": "Wolfgang Panning / Queen Games"
+      },
+      {
+        "designers": "Holger Bösch",
+        "publishers": "moses. Verlag GmbH",
+        "pair_count": 13,
+        "average_rating": 5.82,
+        "combined": "Holger Bösch / moses. Verlag GmbH"
+      },
+      {
+        "designers": "Dominic Crapuchettes",
+        "publishers": "NorthStar Game Studio",
+        "pair_count": 13,
+        "average_rating": 6.9,
+        "combined": "Dominic Crapuchettes / NorthStar Game Studio"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Kaissa Chess & Games",
+        "pair_count": 13,
+        "average_rating": 6.95,
+        "combined": "Inka Brand / Kaissa Chess & Games"
+      },
+      {
+        "designers": "Alex Randolph",
+        "publishers": "Otto Maier Verlag",
+        "pair_count": 13,
+        "average_rating": 5.82,
+        "combined": "Alex Randolph / Otto Maier Verlag"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "Albi",
+        "pair_count": 13,
+        "average_rating": 6.56,
+        "combined": "Silvano Sorrentino / Albi"
+      },
+      {
+        "designers": "Wolfgang Warsch",
+        "publishers": "Schmidt Spiele",
+        "pair_count": 13,
+        "average_rating": 7.42,
+        "combined": "Wolfgang Warsch / Schmidt Spiele"
+      },
+      {
+        "designers": "Doris Matthäus",
+        "publishers": "Doris & Frank",
+        "pair_count": 13,
+        "average_rating": 6.3,
+        "combined": "Doris Matthäus / Doris & Frank"
+      },
+      {
+        "designers": "Frank Chadwick",
+        "publishers": "Hobby Japan",
+        "pair_count": 13,
+        "average_rating": 6.97,
+        "combined": "Frank Chadwick / Hobby Japan"
+      },
+      {
+        "designers": "Matt Hyra",
+        "publishers": "Hobby World",
+        "pair_count": 13,
+        "average_rating": 6.48,
+        "combined": "Matt Hyra / Hobby World"
+      },
+      {
+        "designers": "Robert Dougherty",
+        "publishers": "Your Move Games",
+        "pair_count": 13,
+        "average_rating": 7.04,
+        "combined": "Robert Dougherty / Your Move Games"
+      },
+      {
+        "designers": "Matt Leacock",
+        "publishers": "Hobby Japan",
+        "pair_count": 13,
+        "average_rating": 7.43,
+        "combined": "Matt Leacock / Hobby Japan"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Albi",
+        "pair_count": 13,
+        "average_rating": 6.87,
+        "combined": "Klaus Teuber / Albi"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Catan Studio",
+        "pair_count": 13,
+        "average_rating": 7.02,
+        "combined": "Klaus Teuber / Catan Studio"
+      },
+      {
+        "designers": "Josep Izquierdo Sánchez",
+        "publishers": "Geek Attitude Games",
+        "pair_count": 13,
+        "average_rating": 6.81,
+        "combined": "Josep Izquierdo Sánchez / Geek Attitude Games"
+      },
+      {
+        "designers": "Seiji Kanai",
+        "publishers": "Kanai Factory",
+        "pair_count": 13,
+        "average_rating": 6.44,
+        "combined": "Seiji Kanai / Kanai Factory"
+      },
+      {
+        "designers": "Ramy Badie",
+        "publishers": "Unstable Games",
+        "pair_count": 13,
+        "average_rating": 6.46,
+        "combined": "Ramy Badie / Unstable Games"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Korea Boardgames Co. Ltd.",
+        "pair_count": 13,
+        "average_rating": 7.12,
+        "combined": "Markus Brand / Korea Boardgames Co. Ltd."
+      },
+      {
+        "designers": "Andrew Hackard",
+        "publishers": "Steve Jackson Games",
+        "pair_count": 13,
+        "average_rating": 6.47,
+        "combined": "Andrew Hackard / Steve Jackson Games"
+      },
+      {
+        "designers": "Nicolas Raoult",
+        "publishers": "Guillotine Games",
+        "pair_count": 13,
+        "average_rating": 7.63,
+        "combined": "Nicolas Raoult / Guillotine Games"
+      },
+      {
+        "designers": "Raphaël Guiton",
+        "publishers": "Guillotine Games",
+        "pair_count": 13,
+        "average_rating": 7.63,
+        "combined": "Raphaël Guiton / Guillotine Games"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Filosofia Éditions",
+        "pair_count": 13,
+        "average_rating": 7.12,
+        "combined": "Klaus-Jürgen Wrede / Filosofia Éditions"
+      },
+      {
+        "designers": "Mike Wylie",
+        "publishers": "Worthington Games",
+        "pair_count": 13,
+        "average_rating": 7.09,
+        "combined": "Mike Wylie / Worthington Games"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Lautapelit.fi",
+        "pair_count": 13,
+        "average_rating": 7.18,
+        "combined": "Klaus-Jürgen Wrede / Lautapelit.fi"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "IELLO",
+        "pair_count": 13,
+        "average_rating": 7.04,
+        "combined": "Reiner Knizia / IELLO"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Hobby Japan",
+        "pair_count": 13,
+        "average_rating": 6.96,
+        "combined": "Reiner Knizia / Hobby Japan"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Giochi Uniti",
+        "pair_count": 13,
+        "average_rating": 6.69,
+        "combined": "Reiner Knizia / Giochi Uniti"
+      },
+      {
+        "designers": "Frank Nestel",
+        "publishers": "Doris & Frank",
+        "pair_count": 13,
+        "average_rating": 6.3,
+        "combined": "Frank Nestel / Doris & Frank"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Z-Man Games",
+        "pair_count": 13,
+        "average_rating": 7.45,
+        "combined": "Klaus-Jürgen Wrede / Z-Man Games"
+      },
+      {
+        "designers": "Jean-Baptiste Lullien",
+        "publishers": "Guillotine Games",
+        "pair_count": 13,
+        "average_rating": 7.63,
+        "combined": "Jean-Baptiste Lullien / Guillotine Games"
+      },
+      {
+        "designers": "Reuben Klamer",
+        "publishers": "Hasbro",
+        "pair_count": 13,
+        "average_rating": 5.13,
+        "combined": "Reuben Klamer / Hasbro"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Funforge",
+        "pair_count": 13,
+        "average_rating": 7.31,
+        "combined": "Uwe Rosenberg / Funforge"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "Swan Panasia Co. Ltd.",
+        "pair_count": 13,
+        "average_rating": 6.56,
+        "combined": "Jacques Zeimet / Swan Panasia Co. Ltd."
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "Mercurio",
+        "pair_count": 13,
+        "average_rating": 6.48,
+        "combined": "Martino Chiacchiera / Mercurio"
+      },
+      {
+        "designers": "Martí Lucas Feliu",
+        "publishers": "Geek Attitude Games",
+        "pair_count": 13,
+        "average_rating": 6.81,
+        "combined": "Martí Lucas Feliu / Geek Attitude Games"
+      },
+      {
+        "designers": "Todd Sanders",
+        "publishers": "(Web published)",
+        "pair_count": 13,
+        "average_rating": 6.36,
+        "combined": "Todd Sanders / (Web published)"
+      },
+      {
+        "designers": "Jim Dunnigan",
+        "publishers": "Decision Games (I)",
+        "pair_count": 13,
+        "average_rating": 6.85,
+        "combined": "Jim Dunnigan / Decision Games (I)"
+      },
+      {
+        "designers": "Bernd Eisenstein",
+        "publishers": "Irongames",
+        "pair_count": 13,
+        "average_rating": 6.62,
+        "combined": "Bernd Eisenstein / Irongames"
+      },
+      {
+        "designers": "Adam Carlson",
+        "publishers": "Chip Theory Games",
+        "pair_count": 13,
+        "average_rating": 7.75,
+        "combined": "Adam Carlson / Chip Theory Games"
+      },
+      {
+        "designers": "Steve Jackson (I)",
+        "publishers": "Edge Entertainment",
+        "pair_count": 13,
+        "average_rating": 6.13,
+        "combined": "Steve Jackson (I) / Edge Entertainment"
+      },
+      {
+        "designers": "Antoine Bauza",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 13,
+        "average_rating": 7.16,
+        "combined": "Antoine Bauza / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Kaissa Chess & Games",
+        "pair_count": 13,
+        "average_rating": 6.95,
+        "combined": "Markus Brand / Kaissa Chess & Games"
+      },
+      {
+        "designers": "Stefan Feld",
+        "publishers": "Queen Games",
+        "pair_count": 13,
+        "average_rating": 7.31,
+        "combined": "Stefan Feld / Queen Games"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "Swan Panasia Co. Ltd.",
+        "pair_count": 13,
+        "average_rating": 6.67,
+        "combined": "Friedemann Friese / Swan Panasia Co. Ltd."
+      },
+      {
+        "designers": "Tom Jolly",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 12,
+        "average_rating": 6.43,
+        "combined": "Tom Jolly / Fantasy Flight Games"
+      },
+      {
+        "designers": "Alan R. Moon",
+        "publishers": "Rio Grande Games",
+        "pair_count": 12,
+        "average_rating": 6.4,
+        "combined": "Alan R. Moon / Rio Grande Games"
+      },
+      {
+        "designers": "Christopher Cummins",
+        "publishers": "Decision Games (I)",
+        "pair_count": 12,
+        "average_rating": 6.34,
+        "combined": "Christopher Cummins / Decision Games (I)"
+      },
+      {
+        "designers": "Sandy Petersen",
+        "publishers": "Petersen Games",
+        "pair_count": 12,
+        "average_rating": 7.02,
+        "combined": "Sandy Petersen / Petersen Games"
+      },
+      {
+        "designers": "Cory Jones",
+        "publishers": "Hobby World",
+        "pair_count": 12,
+        "average_rating": 6.67,
+        "combined": "Cory Jones / Hobby World"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Group SNE",
+        "pair_count": 12,
+        "average_rating": 7.11,
+        "combined": "Inka Brand / Group SNE"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "MINDOK",
+        "pair_count": 12,
+        "average_rating": 7.48,
+        "combined": "Klaus-Jürgen Wrede / MINDOK"
+      },
+      {
+        "designers": "David C. Isby",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 12,
+        "average_rating": 6.6,
+        "combined": "David C. Isby / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Mark Simonitch",
+        "publishers": "GMT Games",
+        "pair_count": 12,
+        "average_rating": 8.04,
+        "combined": "Mark Simonitch / GMT Games"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "Drei Magier Spiele",
+        "pair_count": 12,
+        "average_rating": 6.25,
+        "combined": "Jacques Zeimet / Drei Magier Spiele"
+      },
+      {
+        "designers": "Rüdiger Dorn",
+        "publishers": "Ravensburger",
+        "pair_count": 12,
+        "average_rating": 6.57,
+        "combined": "Rüdiger Dorn / Ravensburger"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Group SNE",
+        "pair_count": 12,
+        "average_rating": 7.11,
+        "combined": "Markus Brand / Group SNE"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 12,
+        "average_rating": 7.15,
+        "combined": "Kevin Wilson / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Corinna Harder",
+        "publishers": "moses. Verlag GmbH",
+        "pair_count": 12,
+        "average_rating": 5.94,
+        "combined": "Corinna Harder / moses. Verlag GmbH"
+      },
+      {
+        "designers": "Ben Stoll",
+        "publishers": "Cryptozoic Entertainment",
+        "pair_count": 12,
+        "average_rating": 6.76,
+        "combined": "Ben Stoll / Cryptozoic Entertainment"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Giochi Uniti",
+        "pair_count": 12,
+        "average_rating": 7.07,
+        "combined": "Klaus Teuber / Giochi Uniti"
+      },
+      {
+        "designers": "Cliff Bohm",
+        "publishers": "SlugFest Games",
+        "pair_count": 12,
+        "average_rating": 6.32,
+        "combined": "Cliff Bohm / SlugFest Games"
+      },
+      {
+        "designers": "Alan R. Moon",
+        "publishers": "Galápagos Jogos",
+        "pair_count": 12,
+        "average_rating": 7.44,
+        "combined": "Alan R. Moon / Galápagos Jogos"
+      },
+      {
+        "designers": "Nate French",
+        "publishers": "Fantasy Flight Games",
+        "pair_count": 12,
+        "average_rating": 7.65,
+        "combined": "Nate French / Fantasy Flight Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Eagle-Gryphon Games",
+        "pair_count": 12,
+        "average_rating": 6.29,
+        "combined": "Reiner Knizia / Eagle-Gryphon Games"
+      },
+      {
+        "designers": "Elliot Tebele",
+        "publishers": "What Do You Meme?",
+        "pair_count": 12,
+        "average_rating": 5.35,
+        "combined": "Elliot Tebele / What Do You Meme?"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Popcorn Games",
+        "pair_count": 12,
+        "average_rating": 6.62,
+        "combined": "Reiner Knizia / Popcorn Games"
+      },
+      {
+        "designers": "Haim Shafir",
+        "publishers": "Shafir Games (המשחקים של חיים שפיר)",
+        "pair_count": 12,
+        "average_rating": 5.78,
+        "combined": "Haim Shafir / Shafir Games (המשחקים של חיים שפיר)"
+      },
+      {
+        "designers": "Emanuele Santandrea",
+        "publishers": "VentoNuovo Games",
+        "pair_count": 12,
+        "average_rating": 8.04,
+        "combined": "Emanuele Santandrea / VentoNuovo Games"
+      },
+      {
+        "designers": "Thierry Denoual",
+        "publishers": "Blue Orange (EU)",
+        "pair_count": 12,
+        "average_rating": 5.87,
+        "combined": "Thierry Denoual / Blue Orange (EU)"
+      },
+      {
+        "designers": "Jim Dunnigan",
+        "publishers": "Hobby Japan",
+        "pair_count": 12,
+        "average_rating": 6.77,
+        "combined": "Jim Dunnigan / Hobby Japan"
+      },
+      {
+        "designers": "Théophile Monnier",
+        "publishers": "Vae Victis",
+        "pair_count": 12,
+        "average_rating": 6.9,
+        "combined": "Théophile Monnier / Vae Victis"
+      },
+      {
+        "designers": "John Coveyou",
+        "publishers": "Genius Games",
+        "pair_count": 12,
+        "average_rating": 6.69,
+        "combined": "John Coveyou / Genius Games"
+      },
+      {
+        "designers": "Andy Chambers",
+        "publishers": "Games Workshop Ltd.",
+        "pair_count": 12,
+        "average_rating": 6.86,
+        "combined": "Andy Chambers / Games Workshop Ltd."
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Asmodee",
+        "pair_count": 12,
+        "average_rating": 7.33,
+        "combined": "Eric M. Lang / Asmodee"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Zvezda",
+        "pair_count": 12,
+        "average_rating": 6.53,
+        "combined": "Reiner Knizia / Zvezda"
+      },
+      {
+        "designers": "Fraser Lamont",
+        "publishers": "Fragor Games",
+        "pair_count": 12,
+        "average_rating": 6.52,
+        "combined": "Fraser Lamont / Fragor Games"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Kaissa Chess & Games",
+        "pair_count": 12,
+        "average_rating": 6.98,
+        "combined": "Bruno Cathala / Kaissa Chess & Games"
+      },
+      {
+        "designers": "Tom Wham",
+        "publishers": "Tactical Studies Rules (TSR)",
+        "pair_count": 12,
+        "average_rating": 6.21,
+        "combined": "Tom Wham / Tactical Studies Rules (TSR)"
+      },
+      {
+        "designers": "Mac Gerdts",
+        "publishers": "Rio Grande Games",
+        "pair_count": 12,
+        "average_rating": 7.41,
+        "combined": "Mac Gerdts / Rio Grande Games"
+      },
+      {
+        "designers": "Mac Gerdts",
+        "publishers": "PD-Verlag",
+        "pair_count": 12,
+        "average_rating": 7.41,
+        "combined": "Mac Gerdts / PD-Verlag"
+      },
+      {
+        "designers": "Matt Leacock",
+        "publishers": "Z-Man Games",
+        "pair_count": 12,
+        "average_rating": 7.55,
+        "combined": "Matt Leacock / Z-Man Games"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "Staupe Spiele",
+        "pair_count": 12,
+        "average_rating": 5.7,
+        "combined": "Reinhard Staupe / Staupe Spiele"
+      },
+      {
+        "designers": "Peter C. Hayward",
+        "publishers": "Blue Beard Entertainment",
+        "pair_count": 12,
+        "average_rating": 6.65,
+        "combined": "Peter C. Hayward / Blue Beard Entertainment"
+      },
+      {
+        "designers": "Christian T. Petersen",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 12,
+        "average_rating": 7.01,
+        "combined": "Christian T. Petersen / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Harry Rowland",
+        "publishers": "Australian Design Group",
+        "pair_count": 12,
+        "average_rating": 7.22,
+        "combined": "Harry Rowland / Australian Design Group"
+      },
+      {
+        "designers": "Jeff Siadek",
+        "publishers": "Gorilla Games",
+        "pair_count": 12,
+        "average_rating": 6.42,
+        "combined": "Jeff Siadek / Gorilla Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Hans im Glück",
+        "pair_count": 12,
+        "average_rating": 6.69,
+        "combined": "Reiner Knizia / Hans im Glück"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "FoxGames",
+        "pair_count": 12,
+        "average_rating": 6.53,
+        "combined": "Silvano Sorrentino / FoxGames"
+      },
+      {
+        "designers": "Gene Billingsley",
+        "publishers": "GMT Games",
+        "pair_count": 12,
+        "average_rating": 7.44,
+        "combined": "Gene Billingsley / GMT Games"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Rio Grande Games",
+        "pair_count": 12,
+        "average_rating": 6.46,
+        "combined": "Uwe Rosenberg / Rio Grande Games"
+      },
+      {
+        "designers": "Gordon Lamont",
+        "publishers": "Fragor Games",
+        "pair_count": 12,
+        "average_rating": 6.52,
+        "combined": "Gordon Lamont / Fragor Games"
+      },
+      {
+        "designers": "Hisashi Hayashi",
+        "publishers": "Japon Brand",
+        "pair_count": 12,
+        "average_rating": 6.42,
+        "combined": "Hisashi Hayashi / Japon Brand"
+      },
+      {
+        "designers": "Haim Shafir",
+        "publishers": "Gigamic",
+        "pair_count": 12,
+        "average_rating": 5.86,
+        "combined": "Haim Shafir / Gigamic"
+      },
+      {
+        "designers": "Chris Millar",
+        "publishers": "Wizards of the Coast",
+        "pair_count": 12,
+        "average_rating": 7.35,
+        "combined": "Chris Millar / Wizards of the Coast"
+      },
+      {
+        "designers": "Ann Stambler",
+        "publishers": "Gamewright",
+        "pair_count": 12,
+        "average_rating": 5.35,
+        "combined": "Ann Stambler / Gamewright"
+      },
+      {
+        "designers": "Curt Covert",
+        "publishers": "Smirk & Dagger Games",
+        "pair_count": 12,
+        "average_rating": 6.24,
+        "combined": "Curt Covert / Smirk & Dagger Games"
+      },
+      {
+        "designers": "Robert Dougherty",
+        "publishers": "Wise Wizard Games",
+        "pair_count": 12,
+        "average_rating": 7.56,
+        "combined": "Robert Dougherty / Wise Wizard Games"
+      },
+      {
+        "designers": "Michael Gray",
+        "publishers": "Milton Bradley",
+        "pair_count": 12,
+        "average_rating": 5.81,
+        "combined": "Michael Gray / Milton Bradley"
+      },
+      {
+        "designers": "Alessio Cavatore",
+        "publishers": "Games Workshop Ltd.",
+        "pair_count": 12,
+        "average_rating": 7.2,
+        "combined": "Alessio Cavatore / Games Workshop Ltd."
+      },
+      {
+        "designers": "S. Craig Taylor",
+        "publishers": "Yaquinto",
+        "pair_count": 11,
+        "average_rating": 6.63,
+        "combined": "S. Craig Taylor / Yaquinto"
+      },
+      {
+        "designers": "Merle Robbins",
+        "publishers": "Mattel Inc.",
+        "pair_count": 11,
+        "average_rating": 5.49,
+        "combined": "Merle Robbins / Mattel Inc."
+      },
+      {
+        "designers": "John D. Clair",
+        "publishers": "Alderac Entertainment Group",
+        "pair_count": 11,
+        "average_rating": 7.54,
+        "combined": "John D. Clair / Alderac Entertainment Group"
+      },
+      {
+        "designers": "Friedemann Friese",
+        "publishers": "999 Games",
+        "pair_count": 11,
+        "average_rating": 7,
+        "combined": "Friedemann Friese / 999 Games"
+      },
+      {
+        "designers": "Volko Ruhnke",
+        "publishers": "GMT Games",
+        "pair_count": 11,
+        "average_rating": 7.91,
+        "combined": "Volko Ruhnke / GMT Games"
+      },
+      {
+        "designers": "Ignacy Trzewiczek",
+        "publishers": "IELLO",
+        "pair_count": 11,
+        "average_rating": 6.88,
+        "combined": "Ignacy Trzewiczek / IELLO"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "One Moment Games",
+        "pair_count": 11,
+        "average_rating": 7.23,
+        "combined": "Vlaada Chvátil / One Moment Games"
+      },
+      {
+        "designers": "Rüdiger Dorn",
+        "publishers": "KOSMOS",
+        "pair_count": 11,
+        "average_rating": 6.42,
+        "combined": "Rüdiger Dorn / KOSMOS"
+      },
+      {
+        "designers": "Raphaël Guiton",
+        "publishers": "CMON Global Limited",
+        "pair_count": 11,
+        "average_rating": 7.67,
+        "combined": "Raphaël Guiton / CMON Global Limited"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Piatnik",
+        "pair_count": 11,
+        "average_rating": 7.02,
+        "combined": "Markus Brand / Piatnik"
+      },
+      {
+        "designers": "Michael Kiesling",
+        "publishers": "Maldito Games",
+        "pair_count": 11,
+        "average_rating": 7.19,
+        "combined": "Michael Kiesling / Maldito Games"
+      },
+      {
+        "designers": "Andrew Parks",
+        "publishers": "WizKids (I)",
+        "pair_count": 11,
+        "average_rating": 6.49,
+        "combined": "Andrew Parks / WizKids (I)"
+      },
+      {
+        "designers": "Adam Starkweather",
+        "publishers": "Multi-Man Publishing",
+        "pair_count": 11,
+        "average_rating": 7.48,
+        "combined": "Adam Starkweather / Multi-Man Publishing"
+      },
+      {
+        "designers": "Jeff Lewis",
+        "publishers": "Lock 'n Load Publishing LLC",
+        "pair_count": 11,
+        "average_rating": 8.09,
+        "combined": "Jeff Lewis / Lock 'n Load Publishing LLC"
+      },
+      {
+        "designers": "Phil Eklund",
+        "publishers": "Ion Game Design",
+        "pair_count": 11,
+        "average_rating": 7.73,
+        "combined": "Phil Eklund / Ion Game Design"
+      },
+      {
+        "designers": "Larry Harris Jr.",
+        "publishers": "Avalon Hill",
+        "pair_count": 11,
+        "average_rating": 6.97,
+        "combined": "Larry Harris Jr. / Avalon Hill"
+      },
+      {
+        "designers": "Peter Sarrett",
+        "publishers": "Repos Production",
+        "pair_count": 11,
+        "average_rating": 7.27,
+        "combined": "Peter Sarrett / Repos Production"
+      },
+      {
+        "designers": "Vance von Borries",
+        "publishers": "GMT Games",
+        "pair_count": 11,
+        "average_rating": 7.59,
+        "combined": "Vance von Borries / GMT Games"
+      },
+      {
+        "designers": "Mike Fitzgerald",
+        "publishers": "U.S. Games Systems Inc.",
+        "pair_count": 11,
+        "average_rating": 6.09,
+        "combined": "Mike Fitzgerald / U.S. Games Systems Inc."
+      },
+      {
+        "designers": "Michael Shinall",
+        "publishers": "CMON Global Limited",
+        "pair_count": 11,
+        "average_rating": 8.1,
+        "combined": "Michael Shinall / CMON Global Limited"
+      },
+      {
+        "designers": "Tony Boydell",
+        "publishers": "Surprised Stare Games Ltd",
+        "pair_count": 11,
+        "average_rating": 6.38,
+        "combined": "Tony Boydell / Surprised Stare Games Ltd"
+      },
+      {
+        "designers": "Michael Schacht",
+        "publishers": "White Goblin Games",
+        "pair_count": 11,
+        "average_rating": 6.3,
+        "combined": "Michael Schacht / White Goblin Games"
+      },
+      {
+        "designers": "Antoine Bauza",
+        "publishers": "Gém Klub Kft.",
+        "pair_count": 11,
+        "average_rating": 7.31,
+        "combined": "Antoine Bauza / Gém Klub Kft."
+      },
+      {
+        "designers": "Antoine Bauza",
+        "publishers": "Kaissa Chess & Games",
+        "pair_count": 11,
+        "average_rating": 7.04,
+        "combined": "Antoine Bauza / Kaissa Chess & Games"
+      },
+      {
+        "designers": "Marco Maggi",
+        "publishers": "Devir",
+        "pair_count": 11,
+        "average_rating": 6.76,
+        "combined": "Marco Maggi / Devir"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Galakta",
+        "pair_count": 11,
+        "average_rating": 7.15,
+        "combined": "Inka Brand / Galakta"
+      },
+      {
+        "designers": "Frédéric Henry",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 11,
+        "average_rating": 6.41,
+        "combined": "Frédéric Henry / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "Günter Cornett",
+        "publishers": "Bambus Spieleverlag",
+        "pair_count": 11,
+        "average_rating": 6.14,
+        "combined": "Günter Cornett / Bambus Spieleverlag"
+      },
+      {
+        "designers": "David Carl",
+        "publishers": "Privateer Press",
+        "pair_count": 11,
+        "average_rating": 6.62,
+        "combined": "David Carl / Privateer Press"
+      },
+      {
+        "designers": "Mike Richie",
+        "publishers": "Rather Dashing Games",
+        "pair_count": 11,
+        "average_rating": 6.4,
+        "combined": "Mike Richie / Rather Dashing Games"
+      },
+      {
+        "designers": "Jean-Baptiste Lullien",
+        "publishers": "CMON Global Limited",
+        "pair_count": 11,
+        "average_rating": 7.67,
+        "combined": "Jean-Baptiste Lullien / CMON Global Limited"
+      },
+      {
+        "designers": "Joe Youst",
+        "publishers": "Decision Games (I)",
+        "pair_count": 11,
+        "average_rating": 7.44,
+        "combined": "Joe Youst / Decision Games (I)"
+      },
+      {
+        "designers": "Haim Shafir",
+        "publishers": "Mercurio",
+        "pair_count": 11,
+        "average_rating": 6.05,
+        "combined": "Haim Shafir / Mercurio"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Piatnik",
+        "pair_count": 11,
+        "average_rating": 7.23,
+        "combined": "Klaus-Jürgen Wrede / Piatnik"
+      },
+      {
+        "designers": "Stephen Newberg",
+        "publishers": "Compass Games",
+        "pair_count": 11,
+        "average_rating": 6.19,
+        "combined": "Stephen Newberg / Compass Games"
+      },
+      {
+        "designers": "Justin De Witt",
+        "publishers": "Fireside Games",
+        "pair_count": 11,
+        "average_rating": 6.57,
+        "combined": "Justin De Witt / Fireside Games"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "IDW Games",
+        "pair_count": 11,
+        "average_rating": 6.91,
+        "combined": "Kevin Wilson / IDW Games"
+      },
+      {
+        "designers": "Mat Hart",
+        "publishers": "Steamforged Games Ltd.",
+        "pair_count": 11,
+        "average_rating": 7.07,
+        "combined": "Mat Hart / Steamforged Games Ltd."
+      },
+      {
+        "designers": "Patrick Marino",
+        "publishers": "The Op",
+        "pair_count": 11,
+        "average_rating": 7.13,
+        "combined": "Patrick Marino / The Op"
+      },
+      {
+        "designers": "Rob Daviau",
+        "publishers": "Mondo Games",
+        "pair_count": 11,
+        "average_rating": 8.08,
+        "combined": "Rob Daviau / Mondo Games"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "Zoch Verlag",
+        "pair_count": 11,
+        "average_rating": 6.41,
+        "combined": "Jacques Zeimet / Zoch Verlag"
+      },
+      {
+        "designers": "Rob Daviau",
+        "publishers": "Parker Brothers",
+        "pair_count": 11,
+        "average_rating": 5.94,
+        "combined": "Rob Daviau / Parker Brothers"
+      },
+      {
+        "designers": "Stephen V. Cole",
+        "publishers": "Amarillo Design Bureau Inc.",
+        "pair_count": 11,
+        "average_rating": 7.2,
+        "combined": "Stephen V. Cole / Amarillo Design Bureau Inc."
+      },
+      {
+        "designers": "Stephen Newberg",
+        "publishers": "Simulations Canada",
+        "pair_count": 11,
+        "average_rating": 6.05,
+        "combined": "Stephen Newberg / Simulations Canada"
+      },
+      {
+        "designers": "Jake Thornton",
+        "publishers": "Mantic Games",
+        "pair_count": 11,
+        "average_rating": 7.27,
+        "combined": "Jake Thornton / Mantic Games"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Delta Vision Publishing",
+        "pair_count": 11,
+        "average_rating": 7.57,
+        "combined": "Eric M. Lang / Delta Vision Publishing"
+      },
+      {
+        "designers": "Chris Taylor (I)",
+        "publishers": "Victory Point Games",
+        "pair_count": 11,
+        "average_rating": 7.01,
+        "combined": "Chris Taylor (I) / Victory Point Games"
+      },
+      {
+        "designers": "Wolfgang Warsch",
+        "publishers": "999 Games",
+        "pair_count": 11,
+        "average_rating": 7.5,
+        "combined": "Wolfgang Warsch / 999 Games"
+      },
+      {
+        "designers": "Keith Poulter",
+        "publishers": "3W (World Wide Wargames)",
+        "pair_count": 11,
+        "average_rating": 5.99,
+        "combined": "Keith Poulter / 3W (World Wide Wargames)"
+      },
+      {
+        "designers": "Alessio Cavatore",
+        "publishers": "River Horse (Europe) Ltd",
+        "pair_count": 11,
+        "average_rating": 6.69,
+        "combined": "Alessio Cavatore / River Horse (Europe) Ltd"
+      },
+      {
+        "designers": "Duccio Vitale",
+        "publishers": "Eurogames",
+        "pair_count": 11,
+        "average_rating": 6.74,
+        "combined": "Duccio Vitale / Eurogames"
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Galakta",
+        "pair_count": 11,
+        "average_rating": 7.15,
+        "combined": "Markus Brand / Galakta"
+      },
+      {
+        "designers": "Hjalmar Hach",
+        "publishers": "Horrible Guild",
+        "pair_count": 11,
+        "average_rating": 7.23,
+        "combined": "Hjalmar Hach / Horrible Guild"
+      },
+      {
+        "designers": "Holger Bösch",
+        "publishers": "G3",
+        "pair_count": 11,
+        "average_rating": 5.93,
+        "combined": "Holger Bösch / G3"
+      },
+      {
+        "designers": "Markus Nikisch",
+        "publishers": "HABA",
+        "pair_count": 11,
+        "average_rating": 6.04,
+        "combined": "Markus Nikisch / HABA"
+      },
+      {
+        "designers": "Justin D. Jacobson",
+        "publishers": "Mondo Games",
+        "pair_count": 11,
+        "average_rating": 8.08,
+        "combined": "Justin D. Jacobson / Mondo Games"
+      },
+      {
+        "designers": "Alan R. Moon",
+        "publishers": "Rebel Sp. z o.o.",
+        "pair_count": 11,
+        "average_rating": 7.34,
+        "combined": "Alan R. Moon / Rebel Sp. z o.o."
+      },
+      {
+        "designers": "John Prados",
+        "publishers": "LPS Inc.",
+        "pair_count": 11,
+        "average_rating": 6.65,
+        "combined": "John Prados / LPS Inc."
+      },
+      {
+        "designers": "Paul Peterson",
+        "publishers": "Hobby World",
+        "pair_count": 11,
+        "average_rating": 7.07,
+        "combined": "Paul Peterson / Hobby World"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Gigamic",
+        "pair_count": 11,
+        "average_rating": 6.55,
+        "combined": "Reiner Knizia / Gigamic"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 11,
+        "average_rating": 6.53,
+        "combined": "Reiner Knizia / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Ta-Te Wu",
+        "publishers": "Sunrise Tornado Game Studio",
+        "pair_count": 11,
+        "average_rating": 6.22,
+        "combined": "Ta-Te Wu / Sunrise Tornado Game Studio"
+      },
+      {
+        "designers": "Francesco Nepitello",
+        "publishers": "Devir",
+        "pair_count": 11,
+        "average_rating": 6.76,
+        "combined": "Francesco Nepitello / Devir"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "New Games Order LLC",
+        "pair_count": 11,
+        "average_rating": 6.7,
+        "combined": "Reiner Knizia / New Games Order LLC"
+      },
+      {
+        "designers": "Klaus-Jürgen Wrede",
+        "publishers": "Giochi Uniti",
+        "pair_count": 11,
+        "average_rating": 7.42,
+        "combined": "Klaus-Jürgen Wrede / Giochi Uniti"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "Devir",
+        "pair_count": 11,
+        "average_rating": 6.6,
+        "combined": "Jacques Zeimet / Devir"
+      },
+      {
+        "designers": "Reiner Stockhausen",
+        "publishers": "dlp games",
+        "pair_count": 11,
+        "average_rating": 6.59,
+        "combined": "Reiner Stockhausen / dlp games"
+      },
+      {
+        "designers": "Monty Stambler",
+        "publishers": "Gamewright",
+        "pair_count": 11,
+        "average_rating": 5.36,
+        "combined": "Monty Stambler / Gamewright"
+      },
+      {
+        "designers": "Reinhard Staupe",
+        "publishers": "Educa Korea",
+        "pair_count": 11,
+        "average_rating": 5.79,
+        "combined": "Reinhard Staupe / Educa Korea"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Piatnik",
+        "pair_count": 11,
+        "average_rating": 7.02,
+        "combined": "Inka Brand / Piatnik"
+      },
+      {
+        "designers": "Hans van Tol",
+        "publishers": "The Game Master BV",
+        "pair_count": 11,
+        "average_rating": 5.83,
+        "combined": "Hans van Tol / The Game Master BV"
+      },
+      {
+        "designers": "Reinhold Wittig",
+        "publishers": "KOSMOS",
+        "pair_count": 11,
+        "average_rating": 5.49,
+        "combined": "Reinhold Wittig / KOSMOS"
+      },
+      {
+        "designers": "Joseph M. Balkoski",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 11,
+        "average_rating": 6.64,
+        "combined": "Joseph M. Balkoski / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Reuben Klamer",
+        "publishers": "Milton Bradley",
+        "pair_count": 11,
+        "average_rating": 5.09,
+        "combined": "Reuben Klamer / Milton Bradley"
+      },
+      {
+        "designers": "Tim Fowers",
+        "publishers": "Fowers Games",
+        "pair_count": 11,
+        "average_rating": 7.19,
+        "combined": "Tim Fowers / Fowers Games"
+      },
+      {
+        "designers": "Mark Herman",
+        "publishers": "SPI (Simulations Publications Inc.)",
+        "pair_count": 11,
+        "average_rating": 6.6,
+        "combined": "Mark Herman / SPI (Simulations Publications Inc.)"
+      },
+      {
+        "designers": "Jamey Stegmaier",
+        "publishers": "Stonemaier Games",
+        "pair_count": 11,
+        "average_rating": 7.49,
+        "combined": "Jamey Stegmaier / Stonemaier Games"
+      },
+      {
+        "designers": "Mark Miklos",
+        "publishers": "GMT Games",
+        "pair_count": 11,
+        "average_rating": 7.45,
+        "combined": "Mark Miklos / GMT Games"
+      },
+      {
+        "designers": "Alfred Leonardi",
+        "publishers": "Nova Game Designs",
+        "pair_count": 11,
+        "average_rating": 6.49,
+        "combined": "Alfred Leonardi / Nova Game Designs"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Hobby World",
+        "pair_count": 11,
+        "average_rating": 7.51,
+        "combined": "Corey Konieczka / Hobby World"
+      },
+      {
+        "designers": "Glenn Drover",
+        "publishers": "Eagle-Gryphon Games",
+        "pair_count": 11,
+        "average_rating": 6.53,
+        "combined": "Glenn Drover / Eagle-Gryphon Games"
+      },
+      {
+        "designers": "Silvano Sorrentino",
+        "publishers": "999 Games",
+        "pair_count": 11,
+        "average_rating": 6.48,
+        "combined": "Silvano Sorrentino / 999 Games"
+      },
+      {
+        "designers": "Sid Sackson",
+        "publishers": "Eagle-Gryphon Games",
+        "pair_count": 11,
+        "average_rating": 6.47,
+        "combined": "Sid Sackson / Eagle-Gryphon Games"
+      },
+      {
+        "designers": "Leo Colovini",
+        "publishers": "Piatnik",
+        "pair_count": 11,
+        "average_rating": 6.41,
+        "combined": "Leo Colovini / Piatnik"
+      },
+      {
+        "designers": "Nicolas Raoult",
+        "publishers": "CMON Global Limited",
+        "pair_count": 11,
+        "average_rating": 7.67,
+        "combined": "Nicolas Raoult / CMON Global Limited"
+      },
+      {
+        "designers": "Bastiaan Brederode",
+        "publishers": "LEGO",
+        "pair_count": 11,
+        "average_rating": 5.66,
+        "combined": "Bastiaan Brederode / LEGO"
+      },
+      {
+        "designers": "Lembit Tohver",
+        "publishers": "LPS Inc.",
+        "pair_count": 10,
+        "average_rating": 6.97,
+        "combined": "Lembit Tohver / LPS Inc."
+      },
+      {
+        "designers": "Phil Walker-Harding",
+        "publishers": "KOSMOS",
+        "pair_count": 10,
+        "average_rating": 6.98,
+        "combined": "Phil Walker-Harding / KOSMOS"
+      },
+      {
+        "designers": "Mike Gnade",
+        "publishers": "Rock Manor Games",
+        "pair_count": 10,
+        "average_rating": 7.38,
+        "combined": "Mike Gnade / Rock Manor Games"
+      },
+      {
+        "designers": "Saashi",
+        "publishers": "Saashi & Saashi",
+        "pair_count": 10,
+        "average_rating": 7.14,
+        "combined": "Saashi / Saashi & Saashi"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Hobby World",
+        "pair_count": 10,
+        "average_rating": 7.21,
+        "combined": "Kevin Wilson / Hobby World"
+      },
+      {
+        "designers": "Bruno Faidutti",
+        "publishers": "Heidelberger Spieleverlag",
+        "pair_count": 10,
+        "average_rating": 6.35,
+        "combined": "Bruno Faidutti / Heidelberger Spieleverlag"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Maldito Games",
+        "pair_count": 10,
+        "average_rating": 7.39,
+        "combined": "Uwe Rosenberg / Maldito Games"
+      },
+      {
+        "designers": "Jacques Zeimet",
+        "publishers": "999 Games",
+        "pair_count": 10,
+        "average_rating": 6.5,
+        "combined": "Jacques Zeimet / 999 Games"
+      },
+      {
+        "designers": "Michael Schacht",
+        "publishers": "Rio Grande Games",
+        "pair_count": 10,
+        "average_rating": 6.64,
+        "combined": "Michael Schacht / Rio Grande Games"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Playroom Entertainment",
+        "pair_count": 10,
+        "average_rating": 5.85,
+        "combined": "Reiner Knizia / Playroom Entertainment"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Hobby Japan",
+        "pair_count": 10,
+        "average_rating": 7.15,
+        "combined": "Vlaada Chvátil / Hobby Japan"
+      },
+      {
+        "designers": "Gregory M. Smith",
+        "publishers": "Compass Games",
+        "pair_count": 10,
+        "average_rating": 7.93,
+        "combined": "Gregory M. Smith / Compass Games"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Galakta",
+        "pair_count": 10,
+        "average_rating": 7.2,
+        "combined": "Kevin Wilson / Galakta"
+      },
+      {
+        "designers": "Eric M. Lang",
+        "publishers": "Portal Games",
+        "pair_count": 10,
+        "average_rating": 7.7,
+        "combined": "Eric M. Lang / Portal Games"
+      },
+      {
+        "designers": "John Prados",
+        "publishers": "Against the Odds",
+        "pair_count": 10,
+        "average_rating": 6.67,
+        "combined": "John Prados / Against the Odds"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Filosofia Éditions",
+        "pair_count": 10,
+        "average_rating": 7.59,
+        "combined": "Uwe Rosenberg / Filosofia Éditions"
+      },
+      {
+        "designers": "Michael J. Matheny",
+        "publishers": "Yaquinto",
+        "pair_count": 10,
+        "average_rating": 5.76,
+        "combined": "Michael J. Matheny / Yaquinto"
+      },
+      {
+        "designers": "Stefan Feld",
+        "publishers": "Broadway Toys LTD",
+        "pair_count": 10,
+        "average_rating": 7.57,
+        "combined": "Stefan Feld / Broadway Toys LTD"
+      },
+      {
+        "designers": "David \"Zeb\" Cook",
+        "publishers": "Tactical Studies Rules (TSR)",
+        "pair_count": 10,
+        "average_rating": 5.9,
+        "combined": "David \"Zeb\" Cook / Tactical Studies Rules (TSR)"
+      },
+      {
+        "designers": "Andrea Sfiligoi",
+        "publishers": "Ganesha Games",
+        "pair_count": 10,
+        "average_rating": 7.84,
+        "combined": "Andrea Sfiligoi / Ganesha Games"
+      },
+      {
+        "designers": "Jens Schumacher",
+        "publishers": "moses. Verlag GmbH",
+        "pair_count": 10,
+        "average_rating": 5.91,
+        "combined": "Jens Schumacher / moses. Verlag GmbH"
+      },
+      {
+        "designers": "Klaus Miltenberger",
+        "publishers": "HABA",
+        "pair_count": 10,
+        "average_rating": 6.76,
+        "combined": "Klaus Miltenberger / HABA"
+      },
+      {
+        "designers": "Isaac Vega",
+        "publishers": "Plaid Hat Games",
+        "pair_count": 10,
+        "average_rating": 7.13,
+        "combined": "Isaac Vega / Plaid Hat Games"
+      },
+      {
+        "designers": "Antoine Bauza",
+        "publishers": "Galápagos Jogos",
+        "pair_count": 10,
+        "average_rating": 7.17,
+        "combined": "Antoine Bauza / Galápagos Jogos"
+      },
+      {
+        "designers": "Martino Chiacchiera",
+        "publishers": "Gém Klub Kft.",
+        "pair_count": 10,
+        "average_rating": 6.6,
+        "combined": "Martino Chiacchiera / Gém Klub Kft."
+      },
+      {
+        "designers": "Andrew Hackard",
+        "publishers": "Pegasus Spiele",
+        "pair_count": 10,
+        "average_rating": 6.45,
+        "combined": "Andrew Hackard / Pegasus Spiele"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Filosofia Éditions",
+        "pair_count": 10,
+        "average_rating": 6.64,
+        "combined": "Klaus Teuber / Filosofia Éditions"
+      },
+      {
+        "designers": "Nate Chatellier",
+        "publishers": "Lucky Duck Games",
+        "pair_count": 10,
+        "average_rating": 7.86,
+        "combined": "Nate Chatellier / Lucky Duck Games"
+      },
+      {
+        "designers": "Leo Colovini",
+        "publishers": "Winning Moves Germany",
+        "pair_count": 10,
+        "average_rating": 6.31,
+        "combined": "Leo Colovini / Winning Moves Germany"
+      },
+      {
+        "designers": "Wolfgang Kramer",
+        "publishers": "Maldito Games",
+        "pair_count": 10,
+        "average_rating": 7.19,
+        "combined": "Wolfgang Kramer / Maldito Games"
+      },
+      {
+        "designers": "Christophe Boelinger",
+        "publishers": "Ludically",
+        "pair_count": 10,
+        "average_rating": 6.65,
+        "combined": "Christophe Boelinger / Ludically"
+      },
+      {
+        "designers": "Jordan Weisman",
+        "publishers": "WizKids (I)",
+        "pair_count": 10,
+        "average_rating": 6.39,
+        "combined": "Jordan Weisman / WizKids (I)"
+      },
+      {
+        "designers": "Jeffrey Breslow",
+        "publishers": "Milton Bradley",
+        "pair_count": 10,
+        "average_rating": 5.23,
+        "combined": "Jeffrey Breslow / Milton Bradley"
+      },
+      {
+        "designers": "Prospero Hall",
+        "publishers": "Big G Creative",
+        "pair_count": 10,
+        "average_rating": 6.33,
+        "combined": "Prospero Hall / Big G Creative"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Devir",
+        "pair_count": 10,
+        "average_rating": 7.44,
+        "combined": "Vlaada Chvátil / Devir"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "Cranio Creations",
+        "pair_count": 10,
+        "average_rating": 7.17,
+        "combined": "Vlaada Chvátil / Cranio Creations"
+      },
+      {
+        "designers": "Sam Lewis",
+        "publishers": "FASA",
+        "pair_count": 10,
+        "average_rating": 6.76,
+        "combined": "Sam Lewis / FASA"
+      },
+      {
+        "designers": "Klaus Teuber",
+        "publishers": "Hobby World",
+        "pair_count": 10,
+        "average_rating": 6.72,
+        "combined": "Klaus Teuber / Hobby World"
+      },
+      {
+        "designers": "Justin Gary",
+        "publishers": "Ultra PRO",
+        "pair_count": 10,
+        "average_rating": 7.65,
+        "combined": "Justin Gary / Ultra PRO"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Delta Vision Publishing",
+        "pair_count": 10,
+        "average_rating": 7.14,
+        "combined": "Kevin Wilson / Delta Vision Publishing"
+      },
+      {
+        "designers": "Leo Colovini",
+        "publishers": "Venice Connection",
+        "pair_count": 10,
+        "average_rating": 6.32,
+        "combined": "Leo Colovini / Venice Connection"
+      },
+      {
+        "designers": "Michele Quondam",
+        "publishers": "Giochix.it",
+        "pair_count": 10,
+        "average_rating": 6.32,
+        "combined": "Michele Quondam / Giochix.it"
+      },
+      {
+        "designers": "Rory O'Connor",
+        "publishers": "Asmodee",
+        "pair_count": 10,
+        "average_rating": 6.52,
+        "combined": "Rory O'Connor / Asmodee"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Arclight Games",
+        "pair_count": 10,
+        "average_rating": 6.84,
+        "combined": "Reiner Knizia / Arclight Games"
+      },
+      {
+        "designers": "Karl-Heinz Schmiel",
+        "publishers": "Moskito Spiele",
+        "pair_count": 10,
+        "average_rating": 6.72,
+        "combined": "Karl-Heinz Schmiel / Moskito Spiele"
+      },
+      {
+        "designers": "Geoff Bottone",
+        "publishers": "SlugFest Games",
+        "pair_count": 10,
+        "average_rating": 6.32,
+        "combined": "Geoff Bottone / SlugFest Games"
+      },
+      {
+        "designers": "Kevin Wilson",
+        "publishers": "Edge Entertainment",
+        "pair_count": 10,
+        "average_rating": 7.31,
+        "combined": "Kevin Wilson / Edge Entertainment"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Delta Vision Publishing",
+        "pair_count": 10,
+        "average_rating": 6.26,
+        "combined": "Reiner Knizia / Delta Vision Publishing"
+      },
+      {
+        "designers": "Phil Walker-Harding",
+        "publishers": "Devir",
+        "pair_count": 10,
+        "average_rating": 6.94,
+        "combined": "Phil Walker-Harding / Devir"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Sophisticated Games",
+        "pair_count": 10,
+        "average_rating": 6.42,
+        "combined": "Reiner Knizia / Sophisticated Games"
+      },
+      {
+        "designers": "Inka Brand",
+        "publishers": "Ravensburger",
+        "pair_count": 10,
+        "average_rating": 6.26,
+        "combined": "Inka Brand / Ravensburger"
+      },
+      {
+        "designers": "Nick Little (I)",
+        "publishers": "Indie Boards & Cards",
+        "pair_count": 10,
+        "average_rating": 7.78,
+        "combined": "Nick Little (I) / Indie Boards & Cards"
+      },
+      {
+        "designers": "Frédéric Henry",
+        "publishers": "Gém Klub Kft.",
+        "pair_count": 10,
+        "average_rating": 6.6,
+        "combined": "Frédéric Henry / Gém Klub Kft."
+      },
+      {
+        "designers": "Markus Brand",
+        "publishers": "Ravensburger",
+        "pair_count": 10,
+        "average_rating": 6.26,
+        "combined": "Markus Brand / Ravensburger"
+      },
+      {
+        "designers": "Manny Trembley",
+        "publishers": "Lucky Duck Games",
+        "pair_count": 10,
+        "average_rating": 7.86,
+        "combined": "Manny Trembley / Lucky Duck Games"
+      },
+      {
+        "designers": "Vital Lacerda",
+        "publishers": "Eagle-Gryphon Games",
+        "pair_count": 10,
+        "average_rating": 7.85,
+        "combined": "Vital Lacerda / Eagle-Gryphon Games"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "White Goblin Games",
+        "pair_count": 10,
+        "average_rating": 7.02,
+        "combined": "Uwe Rosenberg / White Goblin Games"
+      },
+      {
+        "designers": "Bruno Faidutti",
+        "publishers": "Asmodee",
+        "pair_count": 10,
+        "average_rating": 6.29,
+        "combined": "Bruno Faidutti / Asmodee"
+      },
+      {
+        "designers": "Shem Phillips",
+        "publishers": "Renegade Game Studios",
+        "pair_count": 10,
+        "average_rating": 7.57,
+        "combined": "Shem Phillips / Renegade Game Studios"
+      },
+      {
+        "designers": "Uwe Rosenberg",
+        "publishers": "Z-Man Games",
+        "pair_count": 10,
+        "average_rating": 7.53,
+        "combined": "Uwe Rosenberg / Z-Man Games"
+      },
+      {
+        "designers": "Stefan Feld",
+        "publishers": "Maldito Games",
+        "pair_count": 10,
+        "average_rating": 7.64,
+        "combined": "Stefan Feld / Maldito Games"
+      },
+      {
+        "designers": "Martin Wallace",
+        "publishers": "KOSMOS",
+        "pair_count": 10,
+        "average_rating": 6.2,
+        "combined": "Martin Wallace / KOSMOS"
+      },
+      {
+        "designers": "Michael Kiesling",
+        "publishers": "Rio Grande Games",
+        "pair_count": 10,
+        "average_rating": 6.63,
+        "combined": "Michael Kiesling / Rio Grande Games"
+      },
+      {
+        "designers": "Holger Bösch",
+        "publishers": "Story Factory",
+        "pair_count": 10,
+        "average_rating": 5.94,
+        "combined": "Holger Bösch / Story Factory"
+      },
+      {
+        "designers": "Sherwin Matthews",
+        "publishers": "Steamforged Games Ltd.",
+        "pair_count": 10,
+        "average_rating": 7.41,
+        "combined": "Sherwin Matthews / Steamforged Games Ltd."
+      },
+      {
+        "designers": "Jeff Morrow",
+        "publishers": "SlugFest Games",
+        "pair_count": 10,
+        "average_rating": 7.6,
+        "combined": "Jeff Morrow / SlugFest Games"
+      },
+      {
+        "designers": "Martin Wallace",
+        "publishers": "Mayfair Games",
+        "pair_count": 10,
+        "average_rating": 6.74,
+        "combined": "Martin Wallace / Mayfair Games"
+      },
+      {
+        "designers": "Martin Wallace",
+        "publishers": "PHALANX",
+        "pair_count": 10,
+        "average_rating": 7.31,
+        "combined": "Martin Wallace / PHALANX"
+      },
+      {
+        "designers": "Adam Starkweather",
+        "publishers": "Compass Games",
+        "pair_count": 10,
+        "average_rating": 7.49,
+        "combined": "Adam Starkweather / Compass Games"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Hurrican",
+        "pair_count": 10,
+        "average_rating": 6.54,
+        "combined": "Bruno Cathala / Hurrican"
+      },
+      {
+        "designers": "Joseph Miranda",
+        "publishers": "Victory Point Games",
+        "pair_count": 10,
+        "average_rating": 7.25,
+        "combined": "Joseph Miranda / Victory Point Games"
+      },
+      {
+        "designers": "Lukas Zach",
+        "publishers": "DV Games",
+        "pair_count": 10,
+        "average_rating": 6.22,
+        "combined": "Lukas Zach / DV Games"
+      },
+      {
+        "designers": "Shem Phillips",
+        "publishers": "Pixie Games",
+        "pair_count": 10,
+        "average_rating": 7.57,
+        "combined": "Shem Phillips / Pixie Games"
+      },
+      {
+        "designers": "Bruno Cathala",
+        "publishers": "Asterion Press",
+        "pair_count": 10,
+        "average_rating": 7.04,
+        "combined": "Bruno Cathala / Asterion Press"
+      },
+      {
+        "designers": "Vlaada Chvátil",
+        "publishers": "GaGa Games",
+        "pair_count": 10,
+        "average_rating": 7.25,
+        "combined": "Vlaada Chvátil / GaGa Games"
+      },
+      {
+        "designers": "Vital Lacerda",
+        "publishers": "Maldito Games",
+        "pair_count": 10,
+        "average_rating": 7.88,
+        "combined": "Vital Lacerda / Maldito Games"
+      },
+      {
+        "designers": "Corey Konieczka",
+        "publishers": "Delta Vision Publishing",
+        "pair_count": 10,
+        "average_rating": 7.52,
+        "combined": "Corey Konieczka / Delta Vision Publishing"
+      },
+      {
+        "designers": "Reiner Knizia",
+        "publishers": "Grail Games",
+        "pair_count": 10,
+        "average_rating": 6.85,
+        "combined": "Reiner Knizia / Grail Games"
+      },
+      {
+        "designers": "Joe Bradford",
+        "publishers": "Hasbro",
+        "pair_count": 10,
+        "average_rating": 5.86,
+        "combined": "Joe Bradford / Hasbro"
+      },
+      {
+        "designers": "Michael Palm",
+        "publishers": "DV Games",
+        "pair_count": 10,
+        "average_rating": 6.22,
+        "combined": "Michael Palm / DV Games"
+      },
+      {
+        "designers": "Holger Bösch",
+        "publishers": "Gen-X Games",
+        "pair_count": 10,
+        "average_rating": 5.83,
+        "combined": "Holger Bösch / Gen-X Games"
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

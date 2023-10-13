@@ -17,9 +17,22 @@
       "mark": {"type": "point", "filled": true},
       "encoding": {
         "color": {
-          "condition": {"value": "steelblue", "selection": "selector244"},
+          "condition": {"value": "steelblue", "selection": "selector032"},
           "value": "grey"
         },
+        "tooltip": [
+          {"field": "designers", "title": "Designer", "type": "nominal"},
+          {
+            "field": "count",
+            "title": "Number of Designed Games",
+            "type": "quantitative"
+          },
+          {
+            "field": "mean",
+            "title": "Average Game Rating",
+            "type": "quantitative"
+          }
+        ],
         "x": {
           "field": "count",
           "title": "Number of Designed Games",
@@ -33,14 +46,14 @@
       },
       "height": 360,
       "selection": {
-        "selector244": {
+        "selector032": {
           "type": "interval",
           "encodings": ["x", "y"],
           "on": "[mousedown[!event.shiftKey], mouseup] > mousemove",
           "translate": "[mousedown[!event.shiftKey], mouseup] > mousemove!",
           "zoom": "wheel![event.altKey]"
         },
-        "selector245": {
+        "selector033": {
           "type": "interval",
           "bind": "scales",
           "on": "[mousedown[event.shiftKey], mouseup] > mousemove",
@@ -48,6 +61,7 @@
           "zoom": "wheel![!event.altKey]"
         }
       },
+      "title": "Board Game Designers",
       "width": 600
     },
     {
@@ -61,7 +75,7 @@
           "title": "Designers",
           "transform": [
             {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
-            {"filter": {"selection": "selector244"}},
+            {"filter": {"selection": "selector032"}},
             {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
             {"filter": "(datum.rank < 20)"}
           ]
@@ -75,7 +89,7 @@
           "title": "Rating",
           "transform": [
             {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
-            {"filter": {"selection": "selector244"}},
+            {"filter": {"selection": "selector032"}},
             {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
             {"filter": "(datum.rank < 20)"}
           ]
