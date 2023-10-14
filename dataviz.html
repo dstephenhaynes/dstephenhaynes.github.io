@@ -34,9 +34,6 @@ td, th {
   text-align: center;
   padding: 8px;
 }
-tr:nth-child(even) {
-  background-color: steelblue;
-}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
@@ -82,16 +79,16 @@ tr:nth-child(even) {
         <br>
         Goals:
         <ul>
-          There are a lot of websites that list the Best Board Games or Board Game Designers based on a wide variety of subjective critera.
-          I wanted to see if the ratings on BoardGameGeek give the same general results.
+          Many websites that list the Best Board Games or Board Game Designers based on a wide variety of subjective criteria.
+          Do the ratings on BoardGameGeek give the same general results?
           Here is what I planned to do:<br><br> 
             <li>Rank Board Game Designers:</li>
             <ul style="font-size:15px;">
-                <li>Create plot of Designers sorted by Number of Games Designed and Average Game Rating.</li>
+                <li>Create a plot of Designers sorted by the Number of Games Designed and the Average Game Rating.</li>
             </ul>
             <li>Rank Board Game Publishers:</li>
             <ul style="font-size:15px;">
-                <li>Create plot of Publishers sorted by Number of Games Published and Average Game Rating.</li>
+                <li>Create a plot of Publishers sorted by the Number of Games Published and the Average Game Rating.</li>
             </ul>
             <li>Determine Best Designer/Publisher Partnerships:</li>
             <ul style="font-size:15px;">
@@ -111,25 +108,24 @@ tr:nth-child(even) {
 <p>
     <ul>
       The BoardGameGeek data set included more than just board game data.
-      The site includes information and ratings for video games, role-playing games, and board game expansions as well.
+      The site also consists of information and ratings for video games, role-playing games, and board game expansions.
       So, the first step was to filter down to just board games.<br>
       At some point in creating the initial plots, I realized there were a lot of outliers skewing the data.
       Here are some issues and the solutions I applied to tidy the data:
       <ul><br>
         <li>
-          Some games had a perfect 10 rating. This was generally a result of the game having just a few ratings.
-          In one case, a game designer had 10 games to their credit which they themselves had rated a 10.
+          Some games had a perfect 10 rating, generally due to the game having just a few ratings.
+          In one case, a game designer had 10 games to their credit, which they themselves had rated a 10.
           That was the only rating each of those games had. How do I avoid having those situations skew the data?
           Well, for a designer or publisher to be considered "successful," shouldn't a lot of people own their Games?
           <ul><br>
-            <li>Solution: Filter the data to eliminate games with fewer than 100 owners on record.</li>
+            <li>Solution: Filter the data to eliminate games with fewer than 100 recorded owners.</li>
           </ul>
         </li>
         <br>
         <li>
-          There were a lot of games attributed to a designer named "Jr."
-          After a bit of head scratching, I realized that any commas in the designer or publisher name were creating separate entries within the CSV.
-          This resulted in a lot of orphaned suffixes skewing the data.
+          There were many games attributed to a designer named "Jr."
+          After some head-scratching, I realized that any commas in the designer or publisher name created separate entries within the CSV, resulting in many orphaned suffixes skewing the data.
           <ul><br>
             <li>Solution: Remap the orphaned suffixes to their original location.<br>
               (Jr., Sr., II, III, IV, PhD, Inc., LLC, Ltd.)</li>
@@ -137,7 +133,7 @@ tr:nth-child(even) {
         </li>
       </ul>
       <br><br>
-      Now that we've done some cleanup, lets see the results.      
+      Now that we've done some cleanup let's see the results.      
     </ul>
 </p>
 <br><br><br><br>
@@ -933,6 +929,19 @@ tr:nth-child(even) {
             "condition": {"value": "steelblue", "selection": "selector248"},
             "value": "grey"
           },
+          "tooltip": [
+          {"field": "publishers", "title": "Publisher", "type": "nominal"},
+          {
+            "field": "count",
+            "title": "Number of Designed Games",
+            "type": "quantitative"
+          },
+          {
+            "field": "mean",
+            "title": "Average Game Rating",
+            "type": "quantitative"
+          }
+          ],
           "x": {
             "field": "count",
             "title": "Number of Published Games",
@@ -6126,22 +6135,37 @@ tr:nth-child(even) {
 <p>
   <ul>
     These are not the results I expected at all. 
-    Time after time, the names that top the lists of <a href="https://www.google.com/search?q=best+board+game+designers">Best Board Game Designers</a>
-    are ones like: Rosenberg, Knizia, Cathala, Lacerda, Garfield. These are the designers that have been around for years.
-    These are the people that have designed dozens if not hundreds of well-known games! So what went wrong?<br>
-    As it turns out,
-    <br><br>
-    8/10 Designers<br>
-    2/10 Publishers
-
+    Time after time, the names that top the <a href="https://www.google.com/search?q=best+board+game+designers">Best Board Game Designers</a>
+    lists include Rosenberg, Knizia, Cathala, Lacerda, and Garfield. These are the designers that have been around for years.
+    These are the people who have designed dozens, if not hundreds, of well-known games! So what went wrong?<br><br>
+    It turns out that having too many games to your credit will pull your averages down. 
+    As the designer scatter plot shows, nearly every designer with 60 or more games to their credit has an average rating below 7.0. 
+    Some brief research of their game credits shows a wide swath of ratings- some great, some not so great.<br><br>
+    Sharing the results with my group of board game friends, they were similarly surprised, fully expecting the "Great Ones" to be at the top.  
+    The group researched the results, mostly looking for some new games to try. 
+    However, after some conversation, one interesting trend appeared.
+    It seemed the majority of the Designers and Publishers in the Top 10 had highly ranked games from the past 5-10 years. 
+    Was this a side effect of the board game industry's growth over the last decade? 
+    Or, perhaps more board game players are aware of websites like BoardGameGeek, and the volume of ratings for more recent games is higher. 
+    I ran a regression analysis on the games from the last 50 years, and, sure enough, there is a 1 to 1.5 rating increase over that period.<br>
   </ul>
-</p>
+  <br><br>
 
-<br><br>
 <div style="text-align: center;color: white;font-size:25px">
   Average Ratings for Board Games Released 1970-2023<br><br>
   <img src="ratingyear.png"></img>
 </div>
+
+<br><br><br>
+
+  <ul>
+    If I were more skilled at statistical analysis, I would like to explore many other facets of this data.
+    Overall, this data worked well for this project, though I would have liked to explore other visualization options as well.
+    Hopefully, this information provides a bit of insight into the world of board games.
+    For my board game group, we'll definitely have some new ideas of board games to bring to the table.
+  </ul>
+</p>
+
 
 <br><br><br><br>
 
