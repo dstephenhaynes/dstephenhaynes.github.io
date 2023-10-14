@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html>
-<body style="background-color: black;font-family:Arial, Helvetica, sans-serif;">
+<body style="background-color: black;font-family:Arial, Helvetica, sans-serif;color: white;">
 <style>
 h1 {
-    color: white;
-    text-align: center;
+  text-align: center;
+}
+h2 {
+  font-size: 30px;
+  text-align: center;
 }
 p {
-    color: white;
-    width: 900px;
-    margin: auto;
-    font-size:20px;
+  width: 900px;
+  margin: auto;
+  font-size:20px;
 }
 ul {
-    color: white;
-    width: 900px;
-    margin: auto;
-    font-size:20px;
+  width: 900px;
+  margin: auto;
+  font-size:20px;
 }
 a {
-    color: white;
+  color: white;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 600;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: steelblue;
 }
 </style>
-    
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+
 <h1 style="font-size:60px;">
     Who Makes the Best Board Games?
 </h1>
@@ -122,112 +142,105 @@ a {
 </p>
 <br><br><br><br>
 
-<div style="text-align: center;color: white;font-size:30px">
-  Analysis of Designers:
-  <br><br>
-</div>
+<h2>Analysis of Designers</h2>
+
+<br><br>
 
 <p style="text-align: center;">Initial scatter plot of the filtered designer list</p>
 <br>
 
 <div style="text-align: center;">
-<head>
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-</head>
-<body>
   <div id="vis1"/>
   <script>
     const spec1 = {
-  "config": {
-    "view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}
-  },
-  "hconcat": [
-    {
-      "mark": {"type": "point", "filled": true},
-      "encoding": {
-        "color": {
-          "condition": {"value": "steelblue", "selection": "selector032"},
-          "value": "grey"
-        },
-        "tooltip": [
-          {"field": "designers", "title": "Designer", "type": "nominal"},
-          {
-            "field": "count",
-            "title": "Number of Designed Games",
-            "type": "quantitative"
-          },
-          {
-            "field": "mean",
-            "title": "Average Game Rating",
-            "type": "quantitative"
-          }
-        ],
-        "x": {
-          "field": "count",
-          "title": "Number of Designed Games",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "mean",
-          "title": "Average Game Rating",
-          "type": "quantitative"
-        }
+      "config": {
+        "view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}
       },
-      "height": 360,
-      "selection": {
-        "selector032": {
-          "type": "interval",
-          "encodings": ["x", "y"],
-          "on": "[mousedown[event.shiftKey], mouseup] > mousemove",
-          "translate": "[mousedown[event.shiftKey], mouseup] > mousemove!",
-          "zoom": "wheel![event.altKey]"
-        },
-        "selector033": {
-          "type": "interval",
-          "bind": "scales",
-          "on": "[mousedown[!event.shiftKey], mouseup] > mousemove",
-          "translate": "[mousedown[!event.shiftKey], mouseup] > mousemove!",
-          "zoom": "wheel![!event.altKey]"
-        }
-      },
-      "title": "Board Game Designers",
-      "width": 600
-    },
-    {
       "hconcat": [
         {
-          "mark": "text",
+          "mark": {"type": "point", "filled": true},
           "encoding": {
-            "text": {"field": "designers", "type": "nominal"},
-            "y": {"axis": null, "field": "row_number", "type": "ordinal"}
-          },
-          "title": "Designers",
-          "transform": [
-            {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
-            {"filter": {"selection": "selector032"}},
-            {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
-            {"filter": "(datum.rank < 20)"}
-          ]
-        },
-        {
-          "mark": "text",
-          "encoding": {
-            "text": {"field": "mean", "type": "nominal"},
-            "y": {"axis": null, "field": "row_number", "type": "ordinal"}
-          },
-          "title": "Rating",
-          "transform": [
-            {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
-            {"filter": {"selection": "selector032"}},
-            {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
-            {"filter": "(datum.rank < 20)"}
-          ]
-        }
-      ]
-    }
-  ],
+            "color": {
+              "condition": {"value": "steelblue", "selection": "selector032"},
+              "value": "grey"
+            },
+            "tooltip": [
+              {"field": "designers", "title": "Designer", "type": "nominal"},
+              {
+                "field": "count",
+                "title": "Number of Designed Games",
+                "type": "quantitative"
+              },
+              {
+                "field": "mean",
+                "title": "Average Game Rating",
+                "type": "quantitative"
+              }
+              ],
+              "x": {
+                "field": "count",
+                "title": "Number of Designed Games",
+                "type": "quantitative"
+              },
+              "y": {
+                "field": "mean",
+                "title": "Average Game Rating",
+                "type": "quantitative"
+              }
+              },
+              "height": 360,
+              "selection": {
+              "selector032": {
+                "type": "interval",
+                "encodings": ["x", "y"],
+                "on": "[mousedown[event.shiftKey], mouseup] > mousemove",
+                "translate": "[mousedown[event.shiftKey], mouseup] > mousemove!",
+                "zoom": "wheel![event.altKey]"
+              },
+              "selector033": {
+                "type": "interval",
+                "bind": "scales",
+                "on": "[mousedown[!event.shiftKey], mouseup] > mousemove",
+                "translate": "[mousedown[!event.shiftKey], mouseup] > mousemove!",
+                "zoom": "wheel![!event.altKey]"
+              }
+              },
+              "title": "Board Game Designers",
+              "width": 600
+              },
+              {
+                "hconcat": [
+                  {
+                    "mark": "text",
+                    "encoding": {
+                      "text": {"field": "designers", "type": "nominal"},
+                      "y": {"axis": null, "field": "row_number", "type": "ordinal"}
+                      },
+                      "title": "Designers",
+                      "transform": [
+                        {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
+                        {"filter": {"selection": "selector032"}},
+                        {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
+                        {"filter": "(datum.rank < 20)"}
+                        ]
+                        },
+                        {
+                          "mark": "text",
+                          "encoding": {
+                            "text": {"field": "mean", "type": "nominal"},
+                            "y": {"axis": null, "field": "row_number", "type": "ordinal"}
+                            },
+                            "title": "Rating",
+                            "transform": [
+                              {"window": [{"op": "row_number", "field": "", "as": "row_number"}]},
+                              {"filter": {"selection": "selector032"}},
+                              {"window": [{"op": "rank", "field": "row_number", "as": "rank"}]},
+                              {"filter": "(datum.rank < 20)"}
+                              ]
+                          }
+                    ]
+                }
+          ],
   "data": {"name": "data-4c55d88842c911d70fb00d574dc8f228"},
   "resolve": {"legend": {"color": "independent"}},
   "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
@@ -759,8 +772,8 @@ a {
 };
     vegaEmbed("#vis1", spec1, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
-</body>
-<p style="color: white;font-size: 15px;">Click & drag to select. Shift + Click to pan. Mousewheel to zoom.</p>
+  <p style="color: white;font-size: 15px;">Click & drag to select. Shift + Click to pan. Mousewheel to zoom.</p>
+  </div>
 </div>
 
 <br><br><br><br>
@@ -768,15 +781,8 @@ a {
 <br>
 
 <div style="text-align: center;">
-
-        <head>
-            <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-        </head>
-            <body>
-            <div id="vis2"/>
-            <script>
+  <div id="vis2"/>
+  <script>
               const spec2 = {
             "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
             "data": {"name": "data-eaf93614faa2a7f590e197dc3cafd286"},
@@ -832,38 +838,89 @@ a {
             }
           };
               vegaEmbed("#vis2", spec2, {mode: "vega-lite"}).then(console.log).catch(console.warn);
-            </script>
-            </body>
-<p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </script>
+  <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </div>
 </div>
    
 <br><br><br><br>
     
+
 <div style="text-align: center;color: white;font-size:20px">
-  Top 10 Board Game Designers<br><br>
-  <img src="designers.png"></img>
+<p>Top 10 Board Game Designers</p><br><br>
+  <table>
+    <tr>
+      <th>Designer</th>
+      <th>Number of Games</th>
+      <th>Average Rating</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/674/ed-beach" target="_blank">Ed Beach</a></th>
+      <th>14</th>
+      <th>8.34</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/26104/jeff-lewis" target="_blank">Jeff Lewis</a></th>
+      <th>11</th>
+      <th>8.09</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/63423/emanuele-santandrea" target="_blank">Emanuele Santandrea</a></th>
+      <th>12</th>
+      <th>8.04</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/55910/gregory-m-smith" target="_blank">Gregory M. Smith</a></th>
+      <th>14</th>
+      <th>7.94</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/75911/noah-cohen" target="_blank">Noah Cohen</a></th>
+      <th>12</th>
+      <th>7.92</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/772/volko-ruhnke" target="_blank">Volko Ruhnke</a></th>
+      <th>11</th>
+      <th>7.91</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/63023/manny-trembley" target="_blank">Manny Trembley</a></th>
+      <th>18</th>
+      <th>7.89</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/97955/nate-chatellier" target="_blank">Nate Chatellier</a></th>
+      <th>18</th>
+      <th>7.89</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/140/mark-simonitch" target="_blank">Mark Simonitch</a></th>
+      <th>19</th>
+      <th>7.86</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/75733/michael-shinall" target="_blank">Micheal Shinall</a></th>
+      <th>15</th>
+      <th>7.86</th>
+    </tr>
+  </table>  
 </div>
+<br>
 <hr>
 
 <br><br>
 
-<div style="text-align: center;color: white;font-size:30px">
-  Analysis of Publishers:
-  <br><br>
-</div>
+<h2>Analysis of Publishers</h2>
+
+<br><br>
 
 <p style="text-align: center;">Initial scatter plot of the filtered publisher list</p>
 <br>
 
 <div style="text-align: center;">
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-  </head>
-  <body>
-    <div id="vis3"/>
-    <script>
+  <div id="vis3"/>
+  <script>
       const spec3 = {
     "config": {
       "view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}
@@ -1884,9 +1941,9 @@ a {
     }
   };
       vegaEmbed("#vis3", spec3, {mode: "vega-lite"}).then(console.log).catch(console.warn);
-    </script>
-  </body>
+  </script>
   <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom. Shift+Click & Drag to select.</p>
+  </div>
 </div>
 
 <br><br><br><br>
@@ -1894,14 +1951,8 @@ a {
 <br>
 
 <div style="text-align: center;">
-        <head>
-            <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-        </head>
-        <body>
-          <div id="vis4"/>
-          <script>
+  <div id="vis4"/>
+  <script>
             const spec4 = {
             "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
             "data": {"name": "data-d997274be4116912c598f7eebaa36119"},
@@ -1957,39 +2008,89 @@ a {
             }
           };
               vegaEmbed("#vis4", spec4, {mode: "vega-lite"}).then(console.log).catch(console.warn);
-          </script>
-        </body>
-        <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </script>
+  <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </div>
 </div>
 
 <br><br><br><br>
     
 <div style="text-align: center;color: white;font-size:20px">
   Top 10 Board Game Publishers<br><br>
-  <img src="publishers.png"></img>
+  <table>
+    <tr>
+      <th>Publisher</th>
+      <th>Number of Games</th>
+      <th>Average Rating</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/50517/nac-wargames" target="_blank">NAC Wargames</a></th>
+      <th>14</th>
+      <th>8.22</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/23283/ventonuovo-games" target="_blank">VentoNuovo Games</a></th>
+      <th>12</th>
+      <th>8.04</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/29412/awaken-realms" target="_blank">Awaken Realms</a></th>
+      <th>14</th>
+      <th>8.03</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/29156/mindclash-games" target="_blank">Mindclash Games</a></th>
+      <th>13</th>
+      <th>7.93</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/6508/hexasim" target="_blank">Hexasim</a></th>
+      <th>19</th>
+      <th>7.90</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/44349/mosaico-jogos" target="_blank">Mosaico Jogos</a></th>
+      <th>29</th>
+      <th>7.85</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/21765/roxley" target="_blank">Roxley</a></th>
+      <th>30</th>
+      <th>7.82</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/22593/chip-theory-games" target="_blank">Chip Theory Games</a></th>
+      <th>16</th>
+      <th>7.81</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/28732/flying-pig-games" target="_blank">Flying Pig Games</a></th>
+      <th>15</th>
+      <th>7.81</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamepublisher/6846/flying-frog-productions" target="_blank">Flying Frog Productions</a></th>
+      <th>17</th>
+      <th>7.80</th>
+    </tr>
+  </table>
 </div>
+<br>
 <hr>
 
 <br><br>
 
-<div style="text-align: center;color: white;font-size:30px">
-  Analysis of Designer/Publisher Pairings:
-  <br><br>
-</div>
+<h2>Analysis of Designer/Publisher Pairings</h2>
+
+<br><br>
 
 <p style="text-align: center;">Initial scatter plot of the filtered Designer/Publisher list</p>
 <br>
 
 <div style="text-align: center;color: white;font-size: 20px;">
-<head>
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-</head>
-<body>
-  <div id="vis"/>
+  <div id="vis5"/>
   <script>
-    const spec = {
+    const spec5 = {
   "config": {
     "view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}
   },
@@ -5800,29 +5901,19 @@ a {
     ]
   }
 };
-    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    vegaEmbed("#vis5", spec5, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
-</body>
-<p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom. Shift+Click & Drag to select.</p>
+  <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom. Shift+Click & Drag to select.</p>
+  </div>
 </div>
-
-
-
-
 
 <br><br><br><br>
 <p style="text-align: center;">Top 10 Designer/Publisher Pairings by Average Rating</p>
 <br>
 
 <div style="text-align: center;">
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-  </head>
-  <body>
-    <div id="vis6"/>
-    <script>
+  <div id="vis6"/>
+  <script>
       const spec6 = {
             "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
             "data": {"name": "data-3698aa33a3f7cf5f646bed67cb008a21"},
@@ -5947,17 +6038,84 @@ a {
             }
           };
               vegaEmbed("#vis6", spec6, {mode: "vega-lite"}).then(console.log).catch(console.warn);
-    </script>
-    </body>
-    <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </script>
+  <p style="color: white;font-size: 15px;">Click & Drag to pan. Mousewheel to zoom.</p>
+  </div>
 </div>
 
 <br><br><br><br>
 
 <div style="text-align: center;color: white;font-size:25px">
   Top 10 Board Game Designer/Publisher Pairings<br><br>
-  <img src="pairings.png"></img>
+  <table>
+    <tr>
+      <th>Designer / Publisher</th>
+      <th>Pair Count</th>
+      <th>Average Rating</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/75733/michael-shinall" target="_blank">Michael Shinall</a>
+         / <a href="https://boardgamegeek.com/boardgamepublisher/21608/cmon-global-limited" target="_blank">CMON Global Limited</a></th>
+      <th>11</th>
+      <th>8.10</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/26104/jeff-lewis" target="_blank">Jeff Lewis</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/6025/lock-n-load-publishing-llc" target="_blank">Lock 'n Load Publishing LLC</a></th></th>
+      <th>11</th>
+      <th>8.09</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/442/rob-daviau" target="_blank">Rob Daviau</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/36274/mondo-games" target="_blank">Mondo Games</a></th></th>
+      <th>11</th>
+      <th>8.08</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/4083/justin-d-jacobson" target="_blank">Justin D. Jacobson</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/36274/mondo-games" target="_blank">Mondo Games</a></th></th>
+      <th>11</th>
+      <th>8.08</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/140/mark-simonitch" target="_blank">Mark Simonitch</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/52/gmt-games" target="_blank">GMT Games</a></th></th>
+      <th>12</th>
+      <th>8.04</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/63423/emanuele-santandrea" target="_blank">Emanuele Santandrea</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/23283/ventonuovo-games" target="_blank">VentoNuovo Games</a></th></th>
+      <th>12</th>
+      <th>8.04</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/55910/gregory-m-smith" target="_blank">Gregory M. Smith</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/3929/compass-games" target="_blank">Compass Games</a></th></th>
+      <th>10</th>
+      <th>7.93</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/772/volko-ruhnke" target="_blank">Volko Runke</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/52/gmt-games" target="_blank">GMT Games</a></th></th>
+      <th>11</th>
+      <th>7.91</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/97955/nate-chatellier" target="_blank">Nate Chatellier</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/21765/roxley" target="_blank">Roxley</a></th></th>
+      <th>18</th>
+      <th>7.89</th>
+    </tr>
+    <tr>
+      <th><a href="https://boardgamegeek.com/boardgamedesigner/63023/manny-trembley" target="_blank">Manny Trembley</a>
+        / <a href="https://boardgamegeek.com/boardgamepublisher/21765/roxley" target="_blank">Roxley</a></th></th>
+      <th>18</th>
+      <th>7.89</th>
+    </tr>
+  </table>
 </div>
+<br>
 <hr>
 
 <br><br>
@@ -5971,18 +6129,28 @@ a {
     Time after time, the names that top the lists of <a href="https://www.google.com/search?q=best+board+game+designers">Best Board Game Designers</a>
     are ones like: Rosenberg, Knizia, Cathala, Lacerda, Garfield. These are the designers that have been around for years.
     These are the people that have designed dozens if not hundreds of well-known games! So what went wrong?<br>
-
+    As it turns out,
+    <br><br>
+    8/10 Designers<br>
+    2/10 Publishers
 
   </ul>
 </p>
 
 <br><br>
 <div style="text-align: center;color: white;font-size:25px">
-  Average Ratings for Board Games Released 1970-Present<br><br>
+  Average Ratings for Board Games Released 1970-2023<br><br>
   <img src="ratingyear.png"></img>
 </div>
 
 <br><br><br><br>
+
+<footer>
+  <p style="font-size: 15px;text-align: right;">
+    DSH -
+    October 2023<br><br>
+  </p>
+</footer>
 
 </body>
 </html>
